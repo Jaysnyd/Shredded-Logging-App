@@ -26,7 +26,7 @@ const _layout = () => {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="dashboard"
         options={{
           title: "Dashboard",
           headerShown: false,
@@ -46,7 +46,7 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name="log"
+        name="logging"
         options={{
           title: "Log",
           headerShown: false,
