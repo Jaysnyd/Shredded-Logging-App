@@ -7,7 +7,7 @@ import {
 import { Tabs } from "expo-router";
 import React from "react";
 
-const _layout = () => {
+const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
@@ -26,7 +26,7 @@ const _layout = () => {
       }}
     >
       <Tabs.Screen
-        name="dashboard"
+        name="index"
         options={{
           title: "Dashboard",
           headerShown: false,
@@ -69,4 +69,4 @@ const _layout = () => {
   );
 };
 
-export default _layout;
+export default TabsLayout;

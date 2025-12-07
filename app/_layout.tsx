@@ -5,10 +5,7 @@ import "./globals.css";
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="workout/[id]" />
-      </Stack>
+      <Stack screenOptions={{ headerShown: false }}></Stack>
     </SafeAreaProvider>
   );
 }
