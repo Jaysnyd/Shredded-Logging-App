@@ -1,72 +1,28 @@
-import {
-  FontAwesome5,
-  Ionicons,
-  MaterialIcons,
-  Octicons,
-} from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
 import React from "react";
 
-const TabsLayout = () => {
+export default function TabsLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "#1E40AF",
-        tabBarInactiveTintColor: "#6B7280",
-        tabBarStyle: {
-          height: 84,
-          backgroundColor: "#F9FAFB",
-          borderTopWidth: 1,
-          borderTopColor: "#E5E7EB",
-        },
-        tabBarIconStyle: {
-          marginTop: 6,
-          marginBottom: 9,
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Dashboard",
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="dashboard" size={30} color="black" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="goals"
-        options={{
-          title: "Goals",
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Octicons name="goal" size={30} color="black" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="logging"
-        options={{
-          title: "Log",
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="list-alt" size={30} color="black" />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={30} color="black" />
-          ),
-        }}
-      />
-    </Tabs>
-  );
-};
+    <NativeTabs tintColor="#4CB491">
+      <NativeTabs.Trigger name="dashboard">
+        <Label>Dashboard</Label>
+        <Icon sf={"house.fill"} drawable="ic_home" />
+      </NativeTabs.Trigger>
 
-export default TabsLayout;
+      <NativeTabs.Trigger name="goals">
+        <Label>Goals</Label>
+        <Icon sf={"trophy.fill"} drawable="ic_trophy" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="logging">
+        <Label>Log</Label>
+        <Icon sf={"list.bullet"} drawable="ic_list" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="settings">
+        <Label>Settings</Label>
+        <Icon sf={"gearshape.fill"} drawable="ic_settings" />
+      </NativeTabs.Trigger>
+    </NativeTabs>
+  );
+}
