@@ -6,7 +6,7 @@ export default function TabsLayout() {
     <NativeTabs tintColor="#4CB491">
       <NativeTabs.Trigger name="dashboard">
         <Label>Dashboard</Label>
-        <Icon sf={"house.fill"} drawable="ic_home" />
+        <Icon sf={"square.grid.2x2.fill"} drawable="dashboard" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="goals">

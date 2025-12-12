@@ -10,7 +10,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // Will change to dynamic, to represent what users sets as their goals.
 // IF no goals, Add just one goal box to tell user to set a goal!
 const benchImg = require("../../../assets/images/bench-press.png");
-
 const squatImg = require("../../../assets/images/squatting.png");
 
 export default function Dashboard() {
