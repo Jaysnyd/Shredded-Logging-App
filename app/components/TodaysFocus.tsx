@@ -24,7 +24,7 @@ export default function TodaysFocus({
         <Text className="text-2xl font-extrabold mt-1 text-black font-style: italic">
           {title}
         </Text>
-        <Text className="text-sm text-black ">{subtitle}</Text>
+        <Text className="text-sm text-black -mt-1 ">{subtitle}</Text>
       </View>
 
       {/* Right Button Section  */}

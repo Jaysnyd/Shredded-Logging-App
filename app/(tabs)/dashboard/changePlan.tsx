@@ -24,17 +24,17 @@ const ChangePlan = () => {
       <ShredPlan />
 
       {/* Plan Structure Explained.   MODAL --> Learn More */}
-      <View className="flex-1 justify-center items-center -mt-12">
+      <View className="flex-1 justify-center items-center">
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
-          className="bg-secondary px-4 py-2 rounded-xl"
+          className="bg-secondary px-4 py-2 rounded-xl -mt-12"
         >
           <Text className="text-white">Information</Text>
         </TouchableOpacity>
 
         <Modal
           visible={modalVisible}
-          text="A Plan is the structure of how your training is organized throughout the week. It
+          text="Your Plan is the structure of how your training is organized throughout the week. It
         divides your workouts into specific muscle groups or goals on different
         days—helping you stay consistent, recover properly, and make steady
         progress."
