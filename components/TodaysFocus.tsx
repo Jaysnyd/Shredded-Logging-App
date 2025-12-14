@@ -20,10 +20,12 @@ export default function TodaysFocus({
     <View className="bg-accent p-5 ml-6 mr-6 mt-2 rounded-xl flex-row justify-between items-center">
       {/* Left Text Section  */}
       <View>
+        
         <Text className="text-base font-semibold text-black">{label}</Text>
         <Text className="text-2xl font-extrabold mt-1 text-black font-style: italic">
           {title}
         </Text>
+        
         <Text className="text-sm text-black -mt-1 ">{subtitle}</Text>
       </View>
 
@@ -40,7 +42,7 @@ export default function TodaysFocus({
         {/* Start Logging Workout  */}
         <TouchableOpacity
           onPress={onStartPress}
-          className="items-center bg-primary px-4 py-2 rounded-full"
+          className="items-center bg-secondary px-4 py-2 rounded-full"
         >
           <Text className="text-white font-semibold text-sm">Start</Text>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
-import Modal from "@/app/components/Modal";
-import ShredPlan from "@/app/components/ShredPlan";
+import Modal from "@/components/Modal";
+import ShredPlan from "@/components/ShredPlan";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

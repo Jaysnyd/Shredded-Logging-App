@@ -74,7 +74,7 @@ const ShredPlan = () => {
         <View className="bg-accent mt-1 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
           <View>
             <Image
-              source={require("../../assets/images/bench-press.png")}
+              source={require("@/assets/images/bench-press.png")}
               className="w-24 h-24"
             />
           </View>
@@ -105,7 +105,7 @@ const ShredPlan = () => {
 
           <View>
             <Image
-              source={require("../../assets/images/BackPose-Panda.png")}
+              source={require("@/assets/images/BackPose-Panda.png")}
               className="w-24 h-24"
               resizeMode="contain"
             />
@@ -137,7 +137,7 @@ const ShredPlan = () => {
 
           <View>
             <Image
-              source={require("../../assets/images/KettleBell-Squats-Panda.png")}
+              source={require("@/assets/images/KettleBell-Squats-Panda.png")}
               className="w-24 h-24"
               resizeMode="contain"
             />
@@ -169,7 +169,7 @@ const ShredPlan = () => {
 
           <View>
             <Image
-              source={require("../../assets/images/ExerciseBall-Panda.png")}
+              source={require("@/assets/images/ExerciseBall-Panda.png")}
               className="w-24 h-24"
               resizeMode="contain"
             />
@@ -201,7 +201,7 @@ const ShredPlan = () => {
 
           <View>
             <Image
-              source={require("../../assets/images/FrontPose-Panda.png")}
+              source={require("@/assets/images/FrontPose-Panda.png")}
               className="w-24 h-24"
               resizeMode="contain"
             />

@@ -15,6 +15,7 @@ const DashboardGoals = ({ imgSrc, goal, personalRecord }: Props) => {
       <View className="w-1/4 ml-2">
         <Image source={imgSrc} className="w-24 h-24" />
       </View>
+
       {/* MIDDLE / GOAL INFO & LEVEL  */}
       <View className="flex-column ml-5">
         <Text className="text-base text-primary font-semibold text-black text-lg">

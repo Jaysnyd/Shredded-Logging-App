@@ -15,6 +15,7 @@ const data = [
 const DashboardChart = () => {
   return (
     <View className="bg-accent mt-1 m-6 p-4 rounded-xl">
+      
       <BarChart
         data={data}
         showGradient
