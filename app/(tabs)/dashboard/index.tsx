@@ -16,11 +16,10 @@ export default function Dashboard() {
   const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-white align-center">
+      <Text className=" text-4xl text-primary font-bold font-style: italic w-full text-center">
+        SHREDDED
+      </Text>
       <ScrollView>
-        <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
-          SHREDDED
-        </Text>
-
         <Text className="text-md text-gray-400 ml-7 mt-8 w-full">
           Welcome Back, Billy!
         </Text>

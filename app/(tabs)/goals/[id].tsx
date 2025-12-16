@@ -1,17 +1,50 @@
-import { staticGoals } from "@/data/staticGoals";
+import Modal from "@/components/EditGoalModal";
+import { useGoals } from "@/context/GoalsContext";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const EditGoal = () => {
+  const router = useRouter();
+
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { goals, updateGoal, deleteGoal } = useGoals();
+
+  const goal = goals.find((g) => g.id === id);
+
   const [name, setName] = useState("");
   const [pr, setPR] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
-  const { id } = useLocalSearchParams();
-  const goal = staticGoals.find((g) => g.id === id);
+  // Change image modal
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    if (goal) {
+      setName(goal.name);
+      setPR(goal.pr);
+      setSelectedImage(goal.image);
+    }
+  }, [goal]);
+
+  if (!goal) return null;
+
+  const handleSave = () => {
+    updateGoal({
+      ...goal,
+      name,
+      pr,
+      image: selectedImage,
+    });
+    router.back();
+  };
+
+  const handleDelete = () => {
+    deleteGoal(goal.id);
+    router.back();
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white items-center w-full">
@@ -19,15 +52,33 @@ const EditGoal = () => {
         SHREDDED
       </Text>
 
+      {/* CHANGE GOAL IMAGE  */}
       <View className="w-full bg-primary h-1/2 rounded-b-3xl mt-3 items-center">
-        <TouchableOpacity className="items-center">
-          <FontAwesome5 name="edit" size={24} color="white" className="mt-8" />
-          <Image
-            source={require("@/assets/images/bench-press.png")}
-            className="w-42 h-40 -mt-6"
-            resizeMode="contain"
-          />
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          className="px-4 py-2 rounded-xl mt-1"
+        >
+          <View className="mt-8 items-center">
+            <FontAwesome5 name="edit" size={24} color="white" />
+          </View>
+
+          <View>
+            <Image
+              source={goal.image}
+              className="w-44 h-44 -mt-8"
+              resizeMode="contain"
+            />
+          </View>
         </TouchableOpacity>
+
+        <Modal
+          visible={modalVisible}
+          text="Your Plan is the structure of how your training is organized throughout the week. It
+              divides your workouts into specific muscle groups or goals on different
+              days—helping you stay consistent, recover properly, and make steady
+              progress."
+          onClose={() => setModalVisible(false)}
+        />
       </View>
 
       {/* EDIT GOAL  */}
@@ -37,38 +88,40 @@ const EditGoal = () => {
         {/* CHANGE GOAL NAME  */}
         <Text className="mt-3 mb-1 font-medium text-base">Goal: </Text>
         <TextInput
-          className="bg-white p-3 rounded-xl mb-4 border text-black border-gray-900"
-          placeholder="Enter Goal Name..."
-          placeholderTextColor="#426D60"
-          value={goal?.name}
+          className="bg-white p-3 rounded-xl mb-4 border text-primary font-bold border-gray-900"
+          value={name}
           onChangeText={setName}
+          autoFocus
         />
 
         {/* CHANGE GOAL PR  */}
         <Text className="font-medium text-base mb-1">Current PR:</Text>
         <TextInput
-          className="bg-white p-3 rounded-xl mb-4 border text-black border-gray-900"
-          placeholder="225lbs..."
-          placeholderTextColor="#426D60"
-          value={goal?.pr}
+          className="bg-white p-3 rounded-xl mb-4 border text-primary font-bold border-gray-900"
+          value={pr}
           onChangeText={setPR}
+          autoFocus
         />
       </View>
 
-      {/* CREATE GOAL BUTTON  */}
-      <TouchableOpacity
-        // onPress={() => router.push("/goals/addGoal")}
-        className="bg-secondary w-1/2 absolute bottom-56 p-4 rounded-xl mt-4 items-center"
-      >
-        <Text className="text-white text-lge font-bold">SAVE</Text>
-      </TouchableOpacity>
+      {/* DELETE GOAL / SAVE CHANGES BUTTONS  */}
+      <View className="w-full absolute bottom-72 p-4 rounded-xl mt-4 flex-row items-center justify-center gap-4">
+        <TouchableOpacity
+          onPress={handleDelete}
+          className="bg-red-500 w-1/4  p-4 rounded-xl items-center"
+        >
+          <Text className="text-white text-lge font-bold">DELETE</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleSave}
+          className="bg-secondary w-1/2 p-4 rounded-xl items-center"
+        >
+          <Text className="text-white text-lge font-bold">SAVE</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
 
 export default EditGoal;
-
-// ACCESS Object element
-// <Text className="text-5xl text-red font-bold font-style: italic">
-//       {`Goal: ${goal?.name}`}
-//     </Text>

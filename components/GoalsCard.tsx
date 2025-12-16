@@ -1,19 +1,13 @@
+import { Goal } from "@/types/goal";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-// type Goal = {
-//   id: string;
-//   name: string;
-//   pr: string;
-//   image: string;
-// };
+type GoalsCardProps = {
+  goal: Goal;
+  onPress: () => void;
+};
 
-// type Props = {
-//   goal: Goal;
-//   onPress: any;
-// };
-
-const GoalsCard = ({ goal, onPress }) => {
+const GoalsCard = ({ goal, onPress }: GoalsCardProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View className="bg-white shadow mt-3 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
@@ -21,8 +15,10 @@ const GoalsCard = ({ goal, onPress }) => {
           <Image source={goal.image} className="w-24 h-24" />
         </View>
 
-        <View className="ml-3">
-          <Text className="text-base font-bold text-black">{goal.name}</Text>
+        <View className="ml-3 w-1/2">
+          <Text className="text-base font-bold text-black mb-2">
+            {goal.name}
+          </Text>
           <Text className="text-sm text-secondary font-semibold ">
             Current PR: {goal.pr}
           </Text>
@@ -40,5 +36,3 @@ const GoalsCard = ({ goal, onPress }) => {
 };
 
 export default GoalsCard;
-
-

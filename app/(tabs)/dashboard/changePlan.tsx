@@ -23,7 +23,7 @@ const ChangePlan = () => {
       {/* PLAN OPTIONS  */}
       <ShredPlan />
 
-      {/* Plan Structure Explained.   MODAL --> Learn More */}
+      {/* Plan Structure Explained.   MODAL */}
       <View className="flex-1 justify-center items-center">
         <TouchableOpacity
           onPress={() => setModalVisible(true)}

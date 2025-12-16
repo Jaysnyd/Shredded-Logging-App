@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -8,11 +7,31 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+//
+import { useGoals } from "@/context/GoalsContext";
+import { router } from "expo-router";
+import { useState } from "react";
+
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 const AddGoal = () => {
   const [name, setName] = useState("");
   const [pr, setPR] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
+
+  const { addGoal } = useGoals();
+
+  //
+  const handleCreateGoal = () => {
+    addGoal({
+      id: uuidv4(),
+      name: name,
+      pr: pr,
+      image: selectedImage,
+    });
+    router.back();
+  };
 
   const images = [
     require("@/assets/images/panda-arm.png"),
@@ -93,7 +112,7 @@ const AddGoal = () => {
 
       {/* CREATE GOAL BUTTON  */}
       <TouchableOpacity
-        // onPress={() => router.push("/goals/addGoal")}
+        onPress={handleCreateGoal}
         className="bg-secondary w-1/2 absolute bottom-56 p-4 rounded-xl mt-4 items-center"
       >
         <Text className="text-white text-lge font-bold">SAVE</Text>

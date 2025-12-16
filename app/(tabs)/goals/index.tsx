@@ -2,14 +2,16 @@
 //
 //
 import GoalsCard from "@/components/GoalsCard";
-import { staticGoals } from "@/data/staticGoals";
+import { useGoals } from "@/context/GoalsContext";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Goals = () => {
+  const { goals } = useGoals();
   const router = useRouter();
+
   return (
     <SafeAreaView className="flex-1 bg-white items-center align-center">
       <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
@@ -36,7 +38,7 @@ const Goals = () => {
       {/* CURRENT GOALS LIST */}
       <ScrollView className="w-full" showsVerticalScrollIndicator={false}>
         <View className="w-full">
-          {staticGoals.map((goal) => (
+          {goals.map((goal) => (
             <GoalsCard
               key={goal.id}
               goal={goal}
@@ -59,14 +61,3 @@ const Goals = () => {
 };
 
 export default Goals;
-
-{
-  /* <Button
-        title="EDIT Goal Entry"
-        onPress={() => router.push("/goals/editGoal")}
-      />
-      <Button
-        title="ADD Goal Entry"
-        onPress={() => router.push("/goals/addGoal")}
-      /> */
-}
