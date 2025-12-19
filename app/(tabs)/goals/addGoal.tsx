@@ -115,7 +115,7 @@ const AddGoal = () => {
         onPress={handleCreateGoal}
         className="bg-secondary w-1/2 absolute bottom-56 p-4 rounded-xl mt-4 items-center"
       >
-        <Text className="text-white text-lge font-bold">SAVE</Text>
+        <Text className="text-white text-lg font-bold">SAVE</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

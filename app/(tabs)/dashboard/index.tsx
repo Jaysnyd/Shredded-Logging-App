@@ -1,22 +1,25 @@
 import DashboardChart from "@/components/DashboardChart";
 import DashboardGoals from "@/components/DashboardGoals";
 import TodaysFocus from "@/components/TodaysFocus";
+import { useGoals } from "@/context/GoalsContext";
 import { useRouter } from "expo-router";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// CHANGE LATER:
-// Static Data for goals now.
-// Will change to dynamic, to represent what users sets as their goals.
-// IF no goals, Add just one goal box to tell user to set a goal!
-const benchImg = require("@/assets/images/bench-press.png");
-const squatImg = require("@/assets/images/squatting.png");
-
 export default function Dashboard() {
+  const { goals } = useGoals();
   const router = useRouter();
+
+  const topGoals = goals.slice(0, 2);
+
+  // TEST if goals array is updated
+  // useEffect(() => {
+  //   console.log("Dash UPDATE", goals);
+  // }, [goals]);
+
   return (
-    <SafeAreaView className="flex-1 bg-white align-center">
-      <Text className=" text-4xl text-primary font-bold font-style: italic w-full text-center">
+    <SafeAreaView className="flex-1 bg-white">
+      <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
         SHREDDED
       </Text>
       <ScrollView>
@@ -44,17 +47,17 @@ export default function Dashboard() {
           Goals
         </Text>
 
-        <DashboardGoals
-          imgSrc={benchImg}
-          goal="Bench Press 900lbs"
-          personalRecord="750lbs"
-        />
+        {/* CURRENT GOALS LIST */}
 
-        <DashboardGoals
-          imgSrc={squatImg}
-          goal="Squat 1600lbs"
-          personalRecord="1250lbs"
-        />
+        <View className="px-4 pb-6">
+          {topGoals.map((goal) => (
+            <DashboardGoals
+              key={goal.id}
+              goal={goal}
+              onPress={() => router.push(`/goals/${goal.id}`)}
+            />
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

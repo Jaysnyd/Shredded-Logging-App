@@ -1,4 +1,5 @@
-import Modal from "@/components/EditGoalModal";
+// import Modal from "@/components/EditGoalModal";
+import EditGoalModal from "@/components/EditGoalModal";
 import { useGoals } from "@/context/GoalsContext";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -14,12 +15,26 @@ const EditGoal = () => {
 
   const goal = goals.find((g) => g.id === id);
 
+  // Draft states
   const [name, setName] = useState("");
   const [pr, setPR] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const goalImages = [
+    require("@/assets/images/panda-arm.png"),
+    require("@/assets/images/bench-press.png"),
+    require("@/assets/images/squatting.png"),
+    require("@/assets/images/BackPose-Panda.png"),
+    require("@/assets/images/Dumbbells-panda.png"),
+    require("@/assets/images/FrontPose-Panda.png"),
+  ];
 
   // Change image modal
   const [modalVisible, setModalVisible] = useState(false);
+  const handleImageSelect = (image: any) => {
+    setSelectedImage(image);
+    setModalVisible(false);
+  };
 
   useEffect(() => {
     if (goal) {
@@ -58,25 +73,25 @@ const EditGoal = () => {
           onPress={() => setModalVisible(true)}
           className="px-4 py-2 rounded-xl mt-1"
         >
-          <View className="mt-8 items-center">
-            <FontAwesome5 name="edit" size={24} color="white" />
-          </View>
+          <View className="-mt-6">
+            <View className="mt-8 items-center">
+              <FontAwesome5 name="edit" size={24} color="white" />
+            </View>
 
-          <View>
-            <Image
-              source={goal.image}
-              className="w-44 h-44 -mt-8"
-              resizeMode="contain"
-            />
+            <View>
+              <Image
+                source={selectedImage ?? goal.image}
+                className="w-36 h-36 mt-1"
+                resizeMode="contain"
+              />
+            </View>
           </View>
         </TouchableOpacity>
 
-        <Modal
+        <EditGoalModal
           visible={modalVisible}
-          text="Your Plan is the structure of how your training is organized throughout the week. It
-              divides your workouts into specific muscle groups or goals on different
-              days—helping you stay consistent, recover properly, and make steady
-              progress."
+          imageList={goalImages}
+          onSelectImage={handleImageSelect}
           onClose={() => setModalVisible(false)}
         />
       </View>

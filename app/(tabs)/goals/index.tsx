@@ -1,16 +1,17 @@
-// GOALS CURRENTLY WORK WITH STATIC DATA
-//
-//
 import GoalsCard from "@/components/GoalsCard";
 import { useGoals } from "@/context/GoalsContext";
 import { useRouter } from "expo-router";
-import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Goals = () => {
   const { goals } = useGoals();
   const router = useRouter();
+
+  // Testing if goals array is updated
+  // useEffect(() => {
+  //   console.log("GOALS UPDATE", goals);
+  // }, [goals]);
 
   return (
     <SafeAreaView className="flex-1 bg-white items-center align-center">
