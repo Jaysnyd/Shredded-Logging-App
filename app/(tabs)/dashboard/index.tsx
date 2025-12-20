@@ -1,6 +1,7 @@
 import DashboardChart from "@/components/DashboardChart";
 import DashboardGoals from "@/components/DashboardGoals";
 import TodaysFocus from "@/components/TodaysFocus";
+import NoGoals from "@/components/NoGoals";
 import { useGoals } from "@/context/GoalsContext";
 import { useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
@@ -49,15 +50,20 @@ export default function Dashboard() {
 
         {/* CURRENT GOALS LIST */}
 
-        <View className="px-4 pb-6">
-          {topGoals.map((goal) => (
-            <DashboardGoals
-              key={goal.id}
-              goal={goal}
-              onPress={() => router.push(`/goals/${goal.id}`)}
-            />
-          ))}
-        </View>
+        {goals.length === 0 ? (
+          <NoGoals />
+        ) : (
+          <View className="px-4 pb-6">
+            {topGoals.map((goal) => (
+              <DashboardGoals
+                key={goal.id}
+                goal={goal}
+                goalArr={goals}
+                onPress={() => router.push(`/goals/${goal.id}`)}
+              />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

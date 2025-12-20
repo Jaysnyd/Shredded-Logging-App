@@ -1,3 +1,4 @@
+import EmptyGoalsScreen from "@/components/EmptyGoalsScreen";
 import GoalsCard from "@/components/GoalsCard";
 import { useGoals } from "@/context/GoalsContext";
 import { useRouter } from "expo-router";
@@ -7,11 +8,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const Goals = () => {
   const { goals } = useGoals();
   const router = useRouter();
-
-  // Testing if goals array is updated
-  // useEffect(() => {
-  //   console.log("GOALS UPDATE", goals);
-  // }, [goals]);
 
   return (
     <SafeAreaView className="flex-1 bg-white items-center align-center">
@@ -37,20 +33,23 @@ const Goals = () => {
       </View>
 
       {/* CURRENT GOALS LIST */}
-      <ScrollView className="w-full" showsVerticalScrollIndicator={false}>
-        <View className="w-full">
-          {goals.map((goal) => (
-            <GoalsCard
-              key={goal.id}
-              goal={goal}
-              onPress={() => router.push(`/goals/${goal.id}`)}
-            />
-          ))}
-        </View>
-      </ScrollView>
+      {goals.length === 0 ? (
+        <EmptyGoalsScreen />
+      ) : (
+        <ScrollView className="w-full" showsVerticalScrollIndicator={false}>
+          <View className="w-full">
+            {goals.map((goal) => (
+              <GoalsCard
+                key={goal.id}
+                goal={goal}
+                onPress={() => router.push(`/goals/${goal.id}`)}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      )}
 
       {/* ADD GOAL BUTTON  */}
-
       <TouchableOpacity
         onPress={() => router.push("/goals/addGoal")}
         className="bg-secondary w-1/2 absolute bottom-28 p-4 rounded-xl mt-4 items-center"

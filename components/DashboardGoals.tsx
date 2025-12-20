@@ -4,9 +4,11 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 type Props = {
   goal: Goal;
   onPress: () => void;
+  goalArr: any;
 };
 
 const DashboardGoals = ({ goal, onPress }: Props) => {
+  
   return (
     <View className="bg-accent mt-3 ml-2 mr-2 rounded-xl flex-row items-center">
       {/* Left Goal Image:  */}

@@ -1,23 +1,17 @@
-import { useRouter } from "expo-router";
 import React from "react";
-import { Button, Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Log = () => {
-  const router = useRouter();
   return (
     <SafeAreaView className="flex-1 justify-center items-center">
-      <Text className="text-5xl text-primary font-bold font-style: italic">
-        LOG Screen
+      <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
+        SHREDDED
       </Text>
-      <Button
-        title="ADD Workout Entry"
-        onPress={() => router.push("/logging/addEntry")}
-      />
-      <Button
-        title="EDIT Workout Entry"
-        onPress={() => router.push("/logging/editEntry")}
-      />
+
+      <ScrollView>
+        <Text>Logging</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 };
