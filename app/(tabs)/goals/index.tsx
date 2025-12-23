@@ -54,7 +54,7 @@ const Goals = () => {
         onPress={() => router.push("/goals/addGoal")}
         className="bg-secondary w-1/2 absolute bottom-28 p-4 rounded-xl mt-4 items-center"
       >
-        <Text className="text-white text-lge font-bold">ADD GOAL</Text>
+        <Text className="text-white text-lg font-bold">Add Goal</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

@@ -1,11 +1,13 @@
 import Calendar from "@/components/Calendar";
 import DateStrip from "@/components/DateStrip";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Log = () => {
+  const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
 
   // Formatting and selecting todays date
@@ -31,7 +33,7 @@ const Log = () => {
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white items-center align-center">
       <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center ">
         SHREDDED
       </Text>
@@ -51,6 +53,7 @@ const Log = () => {
           </View>
         </View>
 
+        {/* Components  */}
         <DateStrip selectedDate={selectedDate} onSelectDate={setSelectedDate} />
 
         <Calendar
@@ -59,7 +62,16 @@ const Log = () => {
           selectedDate={selectedDate}
           onDateChange={setSelectedDate}
         />
+
+        {/* <PlanDayHeader /> */}
       </View>
+
+      <TouchableOpacity
+        onPress={() => router.push("/logging/addEntry")}
+        className="bg-secondary w-1/2 absolute bottom-28 p-4 rounded-xl mt-4 items-center"
+      >
+        <Text className="text-white text-lge font-bold">Add Workout</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

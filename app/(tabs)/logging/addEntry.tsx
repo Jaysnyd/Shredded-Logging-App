@@ -1,13 +1,59 @@
-import React from "react";
-import { Text } from "react-native";
+import SearchBar from "@/components/SearchBar";
+import WorkoutLogList from "@/components/WorkoutLogList";
+import { StaticWorkouts } from "@/data/PreMadeWorkouts";
+import { Workout } from "@/types/workout";
+import { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const AddEntry = () => {
+  const [activeSource, setActiveSource] = useState("Recents");
+  let workoutsToDisplay: Workout[] = [];
+
+  switch (activeSource) {
+    case "premade":
+      workoutsToDisplay = StaticWorkouts;
+      break;
+    // case "custom":
+    //   workoutsToDisplay = customWorkouts;
+    //   break;
+    // case "recents":
+    //   workoutsToDisplay = recentWorkouts;
+    //   break;
+  }
+
   return (
-    <SafeAreaView className="flex-1 justify-center items-center">
-      <Text className="text-5xl text-red font-bold font-style: italic">
-        Add Entry Sub-Screen
+    <SafeAreaView className="flex-1 bg-white items-center align-center">
+      <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
+        SHREDDED
       </Text>
+
+      {/* Workout Selection Section  */}
+      <View className="mt-2 bg-primary w-full items-center h-5/6">
+        <Text className="text-3xl text-white font-bold mt-4 italic">
+          Workouts
+        </Text>
+
+        {/* Search Bar  */}
+        <SearchBar />
+
+        {/* Workout Log List, Recents-Custom-Pre.Made */}
+        <View className="w-full  items-center">
+          <View className="flex-row gap-8">
+            <TouchableOpacity onPress={() => setActiveSource("recents")}>
+              <Text className="text-white">Recents</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setActiveSource("custom")}>
+              <Text className="text-white">My Workouts</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setActiveSource("premade")}>
+              <Text className="text-white">Pre-Made</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <WorkoutLogList workoutsToShow={workoutsToDisplay} />
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,12 +1,18 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Workout } from "@/types/workout";
+import { Text, View } from "react-native";
 
-const WorkoutLogList = () => {
+type Props = {
+  workoutsToShow: Workout[];
+};
+
+const WorkoutLogList = ({ workoutsToShow }: Props) => {
   return (
     <View>
-      <Text>WorkoutLogList</Text>
+      {workoutsToShow.map((workout) => (
+        <Text key={workout.id}>{workout.name}</Text>
+      ))}
     </View>
-  )
-}
+  );
+};
 
-export default WorkoutLogList
+export default WorkoutLogList;
