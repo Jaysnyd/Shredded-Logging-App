@@ -102,7 +102,7 @@ const Log = () => {
             params: { date: selectedDate },
           })
         }
-        className="bg-secondary w-1/2 absolute bottom-28 p-4 rounded-xl mt-4 items-center"
+        className="bg-secondary w-1/2  absolute bottom-28 p-4 rounded-xl mt-4 items-center border-4 border-primary"
       >
         <Text className="text-white text-lge font-bold">Add Workout</Text>
       </TouchableOpacity>

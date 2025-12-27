@@ -16,7 +16,6 @@ const WorkoutLogList = ({ workoutsToShow, curDate }: Props) => {
           workoutId={workout.id}
           name={workout.name}
           focus={workout.focus}
-          imgSrc={workout.image}
           date={curDate}
         />
       ))}

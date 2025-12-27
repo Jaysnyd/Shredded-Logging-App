@@ -9,24 +9,16 @@ type Props = {
 };
 
 const EntryCard = ({ workout, onPress }: Props) => {
-  const getWorkoutImage = (workoutId: string) => {
-    return StaticWorkouts.find((w) => w.id === workoutId)?.image;
-  };
+  
   return (
     <TouchableOpacity onPress={onPress}>
       <View className="bg-white shadow mt-3 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
-        <View>
-          <Image
-            source={getWorkoutImage(workout.workoutId)}
-            className="w-24 h-24"
-          />
-        </View>
 
-        <View className="ml-3 w-1/2">
-          <Text className="text-base font-bold text-black mb-2">
+        <View className="ml-3 w-3/4">
+          <Text className="text-lg font-bold text-black mb-1">
             {workout.name}
           </Text>
-          <Text className="text-sm text-secondary font-semibold">
+          <Text className="text-m text-secondary font-semibold">
             Focus: {workout.focus}
           </Text>
         </View>
