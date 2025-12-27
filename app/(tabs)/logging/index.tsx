@@ -1,9 +1,11 @@
 import Calendar from "@/components/Calendar";
 import DateStrip from "@/components/DateStrip";
+import EntryCard from "@/components/EntryCard";
+import { useLogging } from "@/context/LogContext";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Log = () => {
@@ -19,6 +21,11 @@ const Log = () => {
   ].join("-");
 
   const [selectedDate, setSelectedDate] = useState(formattedToday);
+
+  // USE OF LOG CONTEXT
+  const { getWorkoutsForDate } = useLogging();
+  const workouts = getWorkoutsForDate(selectedDate);
+  console.log(workouts); // DELETE CONSOLE LOG L8R
 
   // Header Date Formatting
   const dateObj = new Date(`${selectedDate}T00:00:00`);
@@ -38,9 +45,8 @@ const Log = () => {
         SHREDDED
       </Text>
 
-      {/* DATE HEADER - DATESTRIP - CALENDAR COMPONENT */}
-      <View className="mt-10">
-        <View className="ml-4 mb-8 flex-row items-center">
+      <View className="mt-4 w-full flex-1">
+        <View className="ml-4 mt-2 mb-8 flex-row items-center">
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <FontAwesome name="calendar" size={36} color="black" />
           </TouchableOpacity>
@@ -53,21 +59,49 @@ const Log = () => {
           </View>
         </View>
 
-        {/* Components  */}
-        <DateStrip selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+        {/* COMPONENTS  */}
+        <View className="w-full">
+          <DateStrip
+            selectedDate={selectedDate}
+            onSelectDate={setSelectedDate}
+          />
 
-        <Calendar
-          visible={modalVisible}
-          onClose={() => setModalVisible(false)}
-          selectedDate={selectedDate}
-          onDateChange={setSelectedDate}
-        />
+          <Calendar
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            selectedDate={selectedDate}
+            onDateChange={setSelectedDate}
+          />
+        </View>
 
         {/* <PlanDayHeader /> */}
+
+        {/* LOGGED WORKOUTS FOR SELECTED DATE:  */}
+        <ScrollView
+          className="w-full flex-1 mt-2"
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 140 }}
+        >
+          <View className="w-full">
+            {workouts.map((workout) => (
+              <EntryCard
+                key={workout.id}
+                workout={workout}
+                onPress={() => router.push(`/logging/${workout.id}`)}
+              />
+            ))}
+          </View>
+        </ScrollView>
       </View>
 
+      {/* ADD WORKOUT  */}
       <TouchableOpacity
-        onPress={() => router.push("/logging/addEntry")}
+        onPress={() =>
+          router.push({
+            pathname: "/logging/addEntry",
+            params: { date: selectedDate },
+          })
+        }
         className="bg-secondary w-1/2 absolute bottom-28 p-4 rounded-xl mt-4 items-center"
       >
         <Text className="text-white text-lge font-bold">Add Workout</Text>

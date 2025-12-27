@@ -5,8 +5,11 @@ import { Workout } from "@/types/workout";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useLocalSearchParams } from "expo-router";
 
 const AddEntry = () => {
+  const { date } = useLocalSearchParams<{ date: string}>();
+
   const [activeSource, setActiveSource] = useState("Recents");
   let workoutsToDisplay: Workout[] = [];
 
@@ -38,7 +41,7 @@ const AddEntry = () => {
         <SearchBar />
 
         {/* Workout Log List, Recents-Custom-Pre.Made */}
-        <View className="w-full  items-center">
+        <View className="w-full items-center">
           <View className="flex-row gap-8">
             <TouchableOpacity onPress={() => setActiveSource("recents")}>
               <Text className="text-white">Recents</Text>
@@ -52,7 +55,7 @@ const AddEntry = () => {
           </View>
         </View>
 
-        <WorkoutLogList workoutsToShow={workoutsToDisplay} />
+        <WorkoutLogList workoutsToShow={workoutsToDisplay} curDate={date} />
       </View>
     </SafeAreaView>
   );

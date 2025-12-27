@@ -20,7 +20,7 @@ const DateStrip = ({ selectedDate, onSelectDate }: any) => {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      className="ml-2 mr-2 -mt-4"
+      className="mx-2 -mt-6 mb-14"
     >
       {dates.map((date) => {
         const iso = date.toISOString().split("T")[0];

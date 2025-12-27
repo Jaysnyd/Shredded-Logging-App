@@ -1,17 +1,26 @@
 import { Workout } from "@/types/workout";
-import { Text, View } from "react-native";
+import { ScrollView } from "react-native";
+import WorkoutLogItem from "./WorkoutLogItem";
 
 type Props = {
   workoutsToShow: Workout[];
+  curDate: string;
 };
 
-const WorkoutLogList = ({ workoutsToShow }: Props) => {
+const WorkoutLogList = ({ workoutsToShow, curDate }: Props) => {
   return (
-    <View>
+    <ScrollView className="w-full mt-3" showsVerticalScrollIndicator={false}>
       {workoutsToShow.map((workout) => (
-        <Text key={workout.id}>{workout.name}</Text>
+        <WorkoutLogItem
+          key={workout.id}
+          workoutId={workout.id}
+          name={workout.name}
+          focus={workout.focus}
+          imgSrc={workout.image}
+          date={curDate}
+        />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
