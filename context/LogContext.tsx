@@ -1,6 +1,7 @@
 import { LoggedWorkout } from "@/types/loggedWorkout";
 import { createContext, useContext, useState } from "react";
 
+// Types 
 type LogsByDate = {
   [date: string]: LoggedWorkout[];
 };
@@ -13,8 +14,10 @@ type LoggingContextType = {
   removeLoggedWorkout: (date: string, workoutId: string) => void;
 };
 
+// Context
 const LoggingContext = createContext<LoggingContextType | undefined>(undefined);
 
+// Provider - Core Logic
 export const LoggingProvider = ({
   children,
 }: {

@@ -6,147 +6,202 @@ export const StaticWorkouts: Workout[] = [
     id: "1",
     name: "Bench Press",
     focus: "Chest",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "2",
     name: "Incline Bench Press",
     focus: "Chest",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "3",
     name: "Dumbbell Chest Press",
     focus: "Chest",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "4",
     name: "Push-Ups",
     focus: "Chest",
-
+    weight: "",
+    sets: "",
   },
-  // SHOULDERS 
+  // SHOULDERS
   {
     id: "5",
     name: "Lateral Raises",
     focus: "Shoulders",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "6",
     name: "Front Raises",
     focus: "Shoulders",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "7",
     name: "Overhead Press",
     focus: "Shoulders",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "8",
     name: "Dumbbell Shoulder Press",
     focus: "Shoulders",
-
+    weight: "",
+    sets: "",
   },
-  // BACK 
+  // BACK
   {
     id: "9",
     name: "Pull-Ups",
     focus: "Lats (Back)",
-
+    weight: "",
+    sets: "",
   },
   {
     id: "10",
     name: "Lat Pulldown",
     focus: "Lats (Back)",
+    weight: "",
+    sets: "",
   },
   {
     id: "11",
     name: "Barbell Row",
     focus: "Mid Back",
+    weight: "",
+    sets: "",
   },
   {
     id: "12",
     name: "Seated Cable Row",
     focus: "Mid Back",
+    weight: "",
+    sets: "",
   },
-  // ARMS 
+  // ARMS
   {
     id: "13",
     name: "Barbell Curl",
     focus: "Biceps (Arms)",
+    weight: "",
+    sets: "",
   },
   {
     id: "14",
     name: "Dumbbell Curl",
     focus: "Biceps (Arms)",
+    weight: "",
+    sets: "",
   },
   {
     id: "15",
     name: "Triceps Pushdown",
     focus: "Triceps (Arms)",
+    weight: "",
+    sets: "",
   },
   {
     id: "16",
     name: "Skull Crushers",
     focus: "Triceps (Arms)",
+    weight: "",
+    sets: "",
   },
-  // LEGS 
+  // LEGS
   {
     id: "17",
     name: "Barbell Squat",
     focus: "Quads (Legs)",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "18",
     name: "Leg Press",
     focus: "Quads (Legs)",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "19",
     name: "Deadlift",
     focus: "Glutes/Hamstrings (Legs)",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "20",
     name: "Hip Thrust",
     focus: "Glutes (Legs)",
+    weight: "",
+    sets: "",
   },
   // CORE
   {
     id: "21",
     name: "Plank",
     focus: "Core",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "22",
     name: "Russian Twists",
     focus: "Core",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "23",
     name: "Hanging Leg Raises",
     focus: "Core",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "24",
     name: "Sit-Ups",
     focus: "Core",
+    weight: "",
+    sets: "",
   },
-  // FULL BODY 
+  // FULL BODY
   {
     id: "25",
     name: "Clean and Press",
     focus: "Full Body",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "26",
     name: "Kettlebell Swings",
     focus: "Full Body",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "27",
     name: "Burpees",
     focus: "Full Body",
-  },{
+    weight: "",
+    sets: "",
+  },
+  {
     id: "28",
     name: "Thrusters",
     focus: "Full Body",
+    weight: "",
+    sets: "",
   },
-  
 ];

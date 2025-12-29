@@ -1,25 +1,29 @@
 import SearchBar from "@/components/SearchBar";
 import WorkoutLogList from "@/components/WorkoutLogList";
+import { useWorkouts } from "@/context/WorkoutContext";
 import { StaticWorkouts } from "@/data/PreMadeWorkouts";
 import { Workout } from "@/types/workout";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useLocalSearchParams } from "expo-router";
 
 const AddEntry = () => {
-  const { date } = useLocalSearchParams<{ date: string}>();
+  const { date } = useLocalSearchParams<{ date: string }>();
+  const router = useRouter();
 
-  const [activeSource, setActiveSource] = useState("Recents");
+  const { customWorkouts } = useWorkouts();
+
+  const [activeSource, setActiveSource] = useState("recents");
   let workoutsToDisplay: Workout[] = [];
 
   switch (activeSource) {
     case "premade":
       workoutsToDisplay = StaticWorkouts;
       break;
-    // case "custom":
-    //   workoutsToDisplay = customWorkouts;
-    //   break;
+    case "custom":
+      workoutsToDisplay = customWorkouts;
+      break;
     // case "recents":
     //   workoutsToDisplay = recentWorkouts;
     //   break;
@@ -57,6 +61,15 @@ const AddEntry = () => {
 
         <WorkoutLogList workoutsToShow={workoutsToDisplay} curDate={date} />
       </View>
+      {/* Create Workout Button  */}
+      {activeSource === "custom" && (
+        <TouchableOpacity
+          onPress={() => router.push("/logging/createWorkout")}
+          className="bg-secondary w-1/2  absolute bottom-28 p-4 rounded-xl items-center border-4 border-primary"
+        >
+          <Text className="text-white text-lg font-bold">Create Workout +</Text>
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 };

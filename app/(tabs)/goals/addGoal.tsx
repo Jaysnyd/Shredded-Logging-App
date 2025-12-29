@@ -1,3 +1,6 @@
+import { useGoals } from "@/context/GoalsContext";
+import { router } from "expo-router";
+import { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -7,10 +10,6 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-//
-import { useGoals } from "@/context/GoalsContext";
-import { router } from "expo-router";
-import { useState } from "react";
 
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
@@ -22,7 +21,6 @@ const AddGoal = () => {
 
   const { addGoal } = useGoals();
 
-  //
   const handleCreateGoal = () => {
     addGoal({
       id: uuidv4(),
@@ -110,7 +108,7 @@ const AddGoal = () => {
         </ScrollView>
       </View>
 
-      {/* CREATE GOAL BUTTON  */}
+      {/* SAVE GOAL BUTTON  */}
       <TouchableOpacity
         onPress={handleCreateGoal}
         className="bg-secondary w-1/2 absolute bottom-56 p-4 rounded-xl mt-4 items-center"

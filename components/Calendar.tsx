@@ -19,7 +19,7 @@ const Calendar = ({
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View className="flex-1 bg-black/50 justify-center items-center px-6">
-        <View className="bg-white w-full h-96 rounded-2xl  pt-6 pb-6 flex-column justify-between align-center items-center">
+        <View className="bg-white w-full h-96 rounded-2xl  pt-6 pb-2 flex-column justify-between align-center items-center">
           <CalendarList
             current={selectedDate}
             onDayPress={(day) => {
