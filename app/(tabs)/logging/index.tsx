@@ -87,7 +87,9 @@ const Log = () => {
               <EntryCard
                 key={workout.id}
                 workout={workout}
-                onPress={() => router.push(`/logging/${workout.id}`)}
+                onPress={() =>
+                  router.push(`/logging/${selectedDate}/${workout.id}`)
+                }
               />
             ))}
           </View>

@@ -12,7 +12,6 @@ const EditGoal = () => {
 
   const { id } = useLocalSearchParams<{ id: string }>();
   const { goals, updateGoal, deleteGoal } = useGoals();
-
   const goal = goals.find((g) => g.id === id);
 
   // Draft states

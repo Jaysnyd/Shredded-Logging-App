@@ -8,6 +8,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Chest",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "2",
@@ -15,6 +16,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Chest",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "3",
@@ -22,6 +24,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Chest",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "4",
@@ -29,6 +32,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Chest",
     weight: "",
     sets: "",
+    source: "premade",
   },
   // SHOULDERS
   {
@@ -37,6 +41,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Shoulders",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "6",
@@ -44,6 +49,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Shoulders",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "7",
@@ -51,6 +57,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Shoulders",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "8",
@@ -58,6 +65,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Shoulders",
     weight: "",
     sets: "",
+    source: "premade",
   },
   // BACK
   {
@@ -66,6 +74,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Lats (Back)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "10",
@@ -73,6 +82,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Lats (Back)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "11",
@@ -80,6 +90,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Mid Back",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "12",
@@ -87,6 +98,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Mid Back",
     weight: "",
     sets: "",
+    source: "premade",
   },
   // ARMS
   {
@@ -95,6 +107,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Biceps (Arms)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "14",
@@ -102,6 +115,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Biceps (Arms)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "15",
@@ -109,6 +123,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Triceps (Arms)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "16",
@@ -116,6 +131,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Triceps (Arms)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   // LEGS
   {
@@ -124,6 +140,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Quads (Legs)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "18",
@@ -131,6 +148,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Quads (Legs)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "19",
@@ -138,6 +156,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Glutes/Hamstrings (Legs)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "20",
@@ -145,6 +164,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Glutes (Legs)",
     weight: "",
     sets: "",
+    source: "premade",
   },
   // CORE
   {
@@ -153,6 +173,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Core",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "22",
@@ -160,6 +181,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Core",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "23",
@@ -167,6 +189,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Core",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "24",
@@ -174,6 +197,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Core",
     weight: "",
     sets: "",
+    source: "premade",
   },
   // FULL BODY
   {
@@ -182,6 +206,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Full Body",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "26",
@@ -189,6 +214,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Full Body",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "27",
@@ -196,6 +222,7 @@ export const StaticWorkouts: Workout[] = [
     focus: "Full Body",
     weight: "",
     sets: "",
+    source: "premade",
   },
   {
     id: "28",
@@ -203,5 +230,6 @@ export const StaticWorkouts: Workout[] = [
     focus: "Full Body",
     weight: "",
     sets: "",
+    source: "premade",
   },
 ];
