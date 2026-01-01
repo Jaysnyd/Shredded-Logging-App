@@ -6,7 +6,8 @@ export default function LoggingLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="addEntry" />
-      <Stack.Screen name="editEntry" />
+      <Stack.Screen name="[date]" />
+      <Stack.Screen name="[id]" />
     </Stack>
   );
 }

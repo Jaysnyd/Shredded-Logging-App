@@ -1,6 +1,6 @@
-import { useLogging } from "@/context/LogContext";
+import { useWorkouts } from "@/context/WorkoutContext";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Image,
@@ -11,18 +11,15 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const EditEntry = () => {
+const EditCustomWorkout = () => {
   const router = useRouter();
+  const { id } = useLocalSearchParams<{ id: string | string[] }>();
+  const workoutId = Array.isArray(id) ? id[0] : id;
 
-  const { id, date } = useLocalSearchParams<{
-    id: string;
-    date: string;
-  }>();
+  const { getWorkoutById, updateCustomWorkout, removeCustomWorkout } =
+    useWorkouts();
 
-  const { getWorkoutsForDate, updateLoggedWorkout, removeLoggedWorkout } =
-    useLogging();
-
-  const workout = getWorkoutsForDate(date).find((w) => w.id === id);
+  const workout = getWorkoutById(workoutId);
 
   // Draft States
   const [name, setName] = useState("");
@@ -31,6 +28,7 @@ const EditEntry = () => {
   const [sets, setSets] = useState("");
   const [error, setError] = useState(false);
 
+  // Populate fields on load
   useEffect(() => {
     if (workout) {
       setName(workout.name);
@@ -40,26 +38,33 @@ const EditEntry = () => {
     }
   }, [workout]);
 
-  if (!date || !id) return null;
-
-  if (!workout) {
-    return <Text>Workout not found!</Text>;
-  }
-
+  // Save Changes Handler
   const handleSave = () => {
+    if (!workout) return;
     if (name.trim().length === 0) {
       setError(true);
       Alert.alert("Workout name cannot be blank");
       return;
     }
+
     setError(false);
-    updateLoggedWorkout(date, {
+
+    updateCustomWorkout({
       ...workout,
-      name,
+      name: name.trim(),
       focus,
       weight,
       sets,
     });
+
+    router.back();
+  };
+
+  // Delete Workout Handler
+  const handleDelete = () => {
+    if (!workout || workout.source !== "custom") return;
+
+    removeCustomWorkout(workout.id);
     router.back();
   };
 
@@ -69,9 +74,9 @@ const EditEntry = () => {
         SHREDDED
       </Text>
 
-      <View className="mt-2 bg-primary w-full items-center align-center h-5/6">
+      <View className="mt-2 bg-primary w-full items-center align-center h-full">
         <Text className="text-3xl font-bold text-white font-style: italic p-2">
-          Edit Workout
+          Edit Your Workout
         </Text>
 
         <View className="w-full items-center">
@@ -85,7 +90,7 @@ const EditEntry = () => {
         {/* WORKOUT TEMPLATE */}
         <View className="flex flex-column w-11/12 mt-2 bg-white p-6 rounded-xl shadow-lg">
           <Text className="text-xl font-bold mb-4 text-center">
-            Change / Delete Logged Workout
+            Change / Delete CUSTOM Workout
           </Text>
 
           {/* NAME  */}
@@ -127,10 +132,7 @@ const EditEntry = () => {
         {/* DELETE GOAL / SAVE CHANGES BUTTONS  */}
         <View className="w-full  p-4 rounded-xl mt-4 flex-row items-center justify-center gap-4">
           <TouchableOpacity
-            onPress={() => {
-              removeLoggedWorkout(date, id);
-              router.back();
-            }}
+            onPress={handleDelete}
             className="bg-red-500 w-1/4  p-4 rounded-xl items-center"
           >
             <Text className="text-white text-lge font-bold">DELETE</Text>
@@ -148,4 +150,4 @@ const EditEntry = () => {
   );
 };
 
-export default EditEntry;
+export default EditCustomWorkout;

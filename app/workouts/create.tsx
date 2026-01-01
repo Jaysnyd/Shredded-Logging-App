@@ -1,21 +1,35 @@
 import { useWorkouts } from "@/context/WorkoutContext";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { v4 as uuidv4 } from "uuid";
 
-const AddEntry = () => {
+const CreateWorkout = () => {
   const [name, setName] = useState("");
   const [focus, setFocus] = useState("");
   const [weight, setWeight] = useState("");
   const [sets, setSets] = useState("");
+  const [error, setError] = useState(false);
 
   const router = useRouter();
 
   const { addCustomWorkout } = useWorkouts();
 
   const handleSaveWorkout = () => {
+    if (name.trim().length === 0) {
+      setError(true);
+      Alert.alert("Workout must have a name");
+      return;
+    }
+    setError(false);
     addCustomWorkout({
       id: uuidv4(),
       name: name,
@@ -33,7 +47,7 @@ const AddEntry = () => {
         SHREDDED
       </Text>
 
-      <View className="mt-2 bg-primary w-full items-center align-center h-5/6">
+      <View className="mt-2 bg-primary w-full items-center align-center h-full">
         <Text className="text-3xl font-bold text-white font-style: italic p-2">
           Create a Workout
         </Text>
@@ -49,7 +63,7 @@ const AddEntry = () => {
         {/* WORKOUT TEMPLATE */}
         <View className="flex flex-column w-11/12 mt-2 bg-white p-6 rounded-xl shadow-lg">
           <Text className="text-xl font-bold mb-4 text-center">
-            Workout Template
+            Custom Workout
           </Text>
 
           {/* NAME  */}
@@ -59,7 +73,10 @@ const AddEntry = () => {
             placeholder="Bench Press..."
             placeholderTextColor="#426D60"
             value={name}
-            onChangeText={setName}
+            onChangeText={(text) => {
+              setName(text);
+              if (error && text.trim().length > 0) setError(false);
+            }}
           />
 
           {/* FOCUS */}
@@ -105,4 +122,4 @@ const AddEntry = () => {
   );
 };
 
-export default AddEntry;
+export default CreateWorkout;

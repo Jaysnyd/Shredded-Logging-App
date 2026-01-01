@@ -64,7 +64,7 @@ const AddEntry = () => {
       {/* Create Workout Button  */}
       {activeSource === "custom" && (
         <TouchableOpacity
-          onPress={() => router.push("/logging/createWorkout")}
+          onPress={() => router.push("/workouts/create")}
           className="bg-secondary w-1/2  absolute bottom-28 p-4 rounded-xl items-center border-4 border-primary"
         >
           <Text className="text-white text-lg font-bold">Create Workout +</Text>

@@ -38,27 +38,33 @@ const WorkoutLogItem = ({
   return (
     <View className="bg-white mt-4 mx-6 rounded-xl p-2 items-center flex-row">
       {/* Description  */}
-      <View className="ml-2">
-        <Text className="text-lg font-bold text-black mb-1">{name}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          router.push(`/workouts/${workoutId}`);
+        }}
+      >
+        <View className="ml-2">
+          <Text className="text-lg font-bold text-black mb-1">{name}</Text>
 
-        <View className="flex-row gap-4">
-          <Text className="text-sm text-secondary font-bold ">
-            Focus: {focus}
-          </Text>
-
-          {weight !== "" && (
+          <View className="flex-row gap-4">
             <Text className="text-sm text-secondary font-bold ">
-              Weight: {weight}
+              Focus: {focus}
             </Text>
-          )}
 
-          {sets !== "" && (
-            <Text className="text-sm text-secondary font-bold ">
-              Sets: {sets}
-            </Text>
-          )}
+            {weight !== "" && (
+              <Text className="text-sm text-secondary font-bold ">
+                Weight: {weight}
+              </Text>
+            )}
+
+            {sets !== "" && (
+              <Text className="text-sm text-secondary font-bold ">
+                Sets: {sets}
+              </Text>
+            )}
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
 
       {/* Add Button  */}
       <TouchableOpacity

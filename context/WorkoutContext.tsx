@@ -7,6 +7,7 @@ type WorkoutContextType = {
   addCustomWorkout: (workout: Workout) => void;
   updateCustomWorkout: (workout: Workout) => void;
   removeCustomWorkout: (workoutId: string) => void;
+  getWorkoutById: (id: string) => Workout | undefined;
 };
 
 // Context
@@ -34,6 +35,10 @@ export const WorkoutProvider = ({
     setCustomWorkouts((prev) => prev.filter((w) => w.id !== workoutId));
   };
 
+  const getWorkoutById = (id: string) => {
+    return customWorkouts.find((w) => w.id === id);
+  };
+
   return (
     <WorkoutContext.Provider
       value={{
@@ -41,6 +46,7 @@ export const WorkoutProvider = ({
         addCustomWorkout,
         updateCustomWorkout,
         removeCustomWorkout,
+        getWorkoutById,
       }}
     >
       {children}
