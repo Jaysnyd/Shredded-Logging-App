@@ -31,6 +31,7 @@ const WorkoutLogItem = ({
       focus,
       weight,
       sets,
+      createdAt: Date.now(),
     });
     router.back();
   };

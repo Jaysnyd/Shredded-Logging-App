@@ -9,7 +9,7 @@ type Props = {
 
 const WorkoutLogList = ({ workoutsToShow, curDate }: Props) => {
   return (
-    <ScrollView className="w-full mt-3" showsVerticalScrollIndicator={false}>
+    <ScrollView className="w-full mt-6" showsVerticalScrollIndicator={false}>
       {workoutsToShow.map((workout) => (
         <WorkoutLogItem
           key={workout.id}

@@ -5,4 +5,5 @@ export type LoggedWorkout = {
   focus: string;
   weight: string;
   sets: string;
+  createdAt: number;
 };

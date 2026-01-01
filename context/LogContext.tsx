@@ -1,7 +1,7 @@
 import { LoggedWorkout } from "@/types/loggedWorkout";
 import { createContext, useContext, useState } from "react";
 
-// Types 
+// Types
 type LogsByDate = {
   [date: string]: LoggedWorkout[];
 };
@@ -12,6 +12,7 @@ type LoggingContextType = {
   getWorkoutsForDate: (date: string) => LoggedWorkout[];
   updateLoggedWorkout: (date: string, workout: LoggedWorkout) => void;
   removeLoggedWorkout: (date: string, workoutId: string) => void;
+  getRecentWorkouts: (limit?: number) => LoggedWorkout[];
 };
 
 // Context
@@ -52,6 +53,24 @@ export const LoggingProvider = ({
     }));
   };
 
+  const getRecentWorkouts = (limit = 20) => {
+    const allLogged = Object.values(logs).flat();
+
+    const sorted = [...allLogged].sort((a, b) => b.createdAt - a.createdAt);
+
+    const seen = new Set<string>();
+    const unique = [];
+
+    for (const log of sorted) {
+      if (!seen.has(log.workoutId)) {
+        seen.add(log.workoutId);
+        unique.push(log);
+      }
+      if (unique.length === limit) break;
+    }
+    return unique;
+  };
+
   return (
     <LoggingContext.Provider
       value={{
@@ -60,6 +79,7 @@ export const LoggingProvider = ({
         getWorkoutsForDate,
         updateLoggedWorkout,
         removeLoggedWorkout,
+        getRecentWorkouts,
       }}
     >
       {children}

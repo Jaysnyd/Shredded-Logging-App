@@ -1,5 +1,6 @@
 import SearchBar from "@/components/SearchBar";
 import WorkoutLogList from "@/components/WorkoutLogList";
+import { useLogging } from "@/context/LogContext";
 import { useWorkouts } from "@/context/WorkoutContext";
 import { StaticWorkouts } from "@/data/PreMadeWorkouts";
 import { Workout } from "@/types/workout";
@@ -12,11 +13,15 @@ const AddEntry = () => {
   const { date } = useLocalSearchParams<{ date: string }>();
   const router = useRouter();
 
+  const { getRecentWorkouts } = useLogging();
+  const recentLogs = getRecentWorkouts();
+
   const { customWorkouts } = useWorkouts();
 
   const [activeSource, setActiveSource] = useState("recents");
   let workoutsToDisplay: Workout[] = [];
 
+  // Workouts List Selection
   switch (activeSource) {
     case "premade":
       workoutsToDisplay = StaticWorkouts;
@@ -24,9 +29,16 @@ const AddEntry = () => {
     case "custom":
       workoutsToDisplay = customWorkouts;
       break;
-    // case "recents":
-    //   workoutsToDisplay = recentWorkouts;
-    //   break;
+    case "recents":
+      workoutsToDisplay = recentLogs.map((log) => ({
+        id: log.workoutId,
+        name: log.name,
+        focus: log.focus,
+        weight: log.weight,
+        sets: log.sets,
+        source: "recent",
+      }));
+      break;
   }
 
   return (
@@ -36,7 +48,7 @@ const AddEntry = () => {
       </Text>
 
       {/* Workout Selection Section  */}
-      <View className="mt-2 bg-primary w-full items-center h-5/6">
+      <View className="mt-2 bg-primary w-full items-center flex-1 items-center mb-16">
         <Text className="text-3xl text-white font-bold mt-4 italic">
           Workouts
         </Text>
@@ -48,24 +60,49 @@ const AddEntry = () => {
         <View className="w-full items-center">
           <View className="flex-row gap-8">
             <TouchableOpacity onPress={() => setActiveSource("recents")}>
-              <Text className="text-white">Recents</Text>
+              <Text
+                className={`text-m ${
+                  activeSource === "recents"
+                    ? "text-white font-bold "
+                    : "text-white"
+                }`}
+              >
+                Recents
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setActiveSource("custom")}>
-              <Text className="text-white">My Workouts</Text>
+              <Text
+                className={`text-m ${
+                  activeSource === "custom"
+                    ? "text-white font-bold "
+                    : "text-white"
+                }`}
+              >
+                My Workouts
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setActiveSource("premade")}>
-              <Text className="text-white">Pre-Made</Text>
+              <Text
+                className={`text-m ${
+                  activeSource === "premade"
+                    ? "text-white font-bold "
+                    : "text-white"
+                }`}
+              >
+                Pre-Made
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
 
+        {/* List displaying workouts that can be logged  */}
         <WorkoutLogList workoutsToShow={workoutsToDisplay} curDate={date} />
       </View>
       {/* Create Workout Button  */}
       {activeSource === "custom" && (
         <TouchableOpacity
           onPress={() => router.push("/workouts/create")}
-          className="bg-secondary w-1/2  absolute bottom-28 p-4 rounded-xl items-center border-4 border-primary"
+          className="bg-secondary w-1/2  absolute bottom-28 p-4 rounded-xl items-center"
         >
           <Text className="text-white text-lg font-bold">Create Workout +</Text>
         </TouchableOpacity>

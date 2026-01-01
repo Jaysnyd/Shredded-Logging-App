@@ -4,6 +4,7 @@ import EntryCard from "@/components/EntryCard";
 import { useLogging } from "@/context/LogContext";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
+import Feather from '@expo/vector-icons/Feather';
 import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -104,9 +105,9 @@ const Log = () => {
             params: { date: selectedDate },
           })
         }
-        className="bg-secondary w-1/2 absolute bottom-28 p-4 rounded-xl mt-4 items-center"
+        className="bg-secondary absolute bottom-28 rounded-full w-16 h-16 items-center justify-center border-4 border-accent"
       >
-        <Text className="text-white text-lg font-bold">Add Workout</Text>
+        <Feather name="plus" size={24} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
   );

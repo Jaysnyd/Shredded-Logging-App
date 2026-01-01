@@ -4,5 +4,5 @@ export type Workout = {
   focus: string;
   weight: string;
   sets: string;
-  source: "premade" | "custom";
+  source: "premade" | "custom" | "recent";
 };
