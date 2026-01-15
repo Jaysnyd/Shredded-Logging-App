@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   Alert,
   Image,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -18,6 +19,7 @@ const CreateWorkout = () => {
   const [weight, setWeight] = useState("");
   const [sets, setSets] = useState("");
   const [error, setError] = useState(false);
+  const [errorFocus, setErrorFocus] = useState(false);
 
   const router = useRouter();
 
@@ -30,6 +32,14 @@ const CreateWorkout = () => {
       return;
     }
     setError(false);
+
+    if (focus.trim().length === 0) {
+      setErrorFocus(true);
+      Alert.alert("Muscle focus cannot be empty");
+      return;
+    }
+    setErrorFocus(false);
+
     addCustomWorkout({
       id: uuidv4(),
       name: name,
@@ -61,7 +71,7 @@ const CreateWorkout = () => {
         </View>
 
         {/* WORKOUT TEMPLATE */}
-        <View className="flex flex-column w-11/12 mt-2 bg-white p-6 rounded-xl shadow-lg">
+        <ScrollView className="flex-1 flex-column w-11/12 mt-2 bg-white p-6 rounded-xl shadow-lg ">
           <Text className="text-xl font-bold mb-4 text-center">
             Custom Workout
           </Text>
@@ -86,7 +96,11 @@ const CreateWorkout = () => {
             placeholder="Chest..."
             placeholderTextColor="#426D60"
             value={focus}
-            onChangeText={setFocus}
+            // onChangeText={setFocus}
+            onChangeText={(text) => {
+              setFocus(text);
+              if (errorFocus && text.trim().length > 0) setErrorFocus(false);
+            }}
           />
 
           {/* WEIGHT */}
@@ -108,7 +122,7 @@ const CreateWorkout = () => {
             value={sets}
             onChangeText={setSets}
           />
-        </View>
+        </ScrollView>
 
         {/* SAVE WORKOUT BUTTON  */}
         <TouchableOpacity

@@ -19,6 +19,7 @@ const WorkoutLogList = ({ workoutsToShow, curDate }: Props) => {
           weight={workout.weight}
           sets={workout.sets}
           date={curDate}
+          source={workout.source}
         />
       ))}
     </ScrollView>

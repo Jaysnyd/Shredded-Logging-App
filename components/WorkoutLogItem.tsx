@@ -11,6 +11,7 @@ type Props = {
   weight: string;
   sets: string;
   date: string;
+  source: string;
 };
 
 const WorkoutLogItem = ({
@@ -20,8 +21,12 @@ const WorkoutLogItem = ({
   weight,
   sets,
   date,
+  source,
 }: Props) => {
   const { addWorkoutToDate } = useLogging();
+
+  // Disable touchable opacity if workout is premade
+  const isPremade = source === "premade";
 
   const handleAddWorkout = () => {
     addWorkoutToDate(date, {
@@ -37,13 +42,15 @@ const WorkoutLogItem = ({
   };
 
   return (
-    <View className="bg-white mt-4 mx-6 rounded-xl p-2 items-center flex-row">
-      {/* Description  */}
-      <TouchableOpacity
-        onPress={() => {
-          router.push(`/workouts/${workoutId}`);
-        }}
-      >
+    <TouchableOpacity
+      disabled={isPremade}
+      onPress={() => {
+        router.push(`/workouts/${workoutId}`);
+      }}
+    >
+      <View className="bg-white mt-4 mx-6 rounded-xl p-2 items-center flex-row">
+        {/* Description  */}
+
         <View className="ml-2">
           <Text className="text-lg font-bold text-black mb-1">{name}</Text>
 
@@ -65,16 +72,16 @@ const WorkoutLogItem = ({
             )}
           </View>
         </View>
-      </TouchableOpacity>
 
-      {/* Add Button  */}
-      <TouchableOpacity
-        onPress={handleAddWorkout}
-        className="absolute right-3 items-center bg-secondary px-4 py-2 rounded-full "
-      >
-        <Text className="text-white text-xl font-bold">{"+"}</Text>
-      </TouchableOpacity>
-    </View>
+        {/* Add Button  */}
+        <TouchableOpacity
+          onPress={handleAddWorkout}
+          className="absolute right-3 items-center bg-secondary px-4 py-2 rounded-full "
+        >
+          <Text className="text-white text-xl font-bold">{"+"}</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   );
 };
 

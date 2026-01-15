@@ -63,7 +63,7 @@ const AddEntry = () => {
               <Text
                 className={`text-m ${
                   activeSource === "recents"
-                    ? "text-white font-bold "
+                    ? "text-white font-bold underline underline-offset-8"
                     : "text-white"
                 }`}
               >
@@ -74,7 +74,7 @@ const AddEntry = () => {
               <Text
                 className={`text-m ${
                   activeSource === "custom"
-                    ? "text-white font-bold "
+                    ? "text-white font-bold underline underline-offset-8"
                     : "text-white"
                 }`}
               >
@@ -85,7 +85,7 @@ const AddEntry = () => {
               <Text
                 className={`text-m ${
                   activeSource === "premade"
-                    ? "text-white font-bold "
+                    ? "text-white font-bold underline underline-offset-8"
                     : "text-white"
                 }`}
               >
