@@ -96,7 +96,6 @@ const CreateWorkout = () => {
             placeholder="Chest..."
             placeholderTextColor="#426D60"
             value={focus}
-            // onChangeText={setFocus}
             onChangeText={(text) => {
               setFocus(text);
               if (errorFocus && text.trim().length > 0) setErrorFocus(false);
@@ -116,7 +115,7 @@ const CreateWorkout = () => {
           {/* SETS */}
           <Text className="font-medium text-base mb-1">Sets:</Text>
           <TextInput
-            className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
+            className="bg-white p-3 rounded-xl mb-1 border border-gray-900"
             placeholder="3"
             placeholderTextColor="#426D60"
             value={sets}

@@ -2,10 +2,11 @@ import SearchBar from "@/components/SearchBar";
 import WorkoutLogList from "@/components/WorkoutLogList";
 import { useLogging } from "@/context/LogContext";
 import { useWorkouts } from "@/context/WorkoutContext";
+import { useDebounce } from "@/data/debounce";
 import { StaticWorkouts } from "@/data/PreMadeWorkouts";
 import { Workout } from "@/types/workout";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -19,27 +20,47 @@ const AddEntry = () => {
   const { customWorkouts } = useWorkouts();
 
   const [activeSource, setActiveSource] = useState("recents");
-  let workoutsToDisplay: Workout[] = [];
 
-  // Workouts List Selection
-  switch (activeSource) {
-    case "premade":
-      workoutsToDisplay = StaticWorkouts;
-      break;
-    case "custom":
-      workoutsToDisplay = customWorkouts;
-      break;
-    case "recents":
-      workoutsToDisplay = recentLogs.map((log) => ({
-        id: log.workoutId,
-        name: log.name,
-        focus: log.focus,
-        weight: log.weight,
-        sets: log.sets,
-        source: "recent",
-      }));
-      break;
-  }
+  // Search bar filtering logic:
+  const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 300);
+
+  // Normalize recent workouts
+  const normalizedRecents: Workout[] = recentLogs.map((log) => ({
+    id: log.workoutId,
+    name: log.name,
+    focus: log.focus,
+    weight: log.weight,
+    sets: log.sets,
+    source: "recent",
+  }));
+
+  // Compute base workouts by active source
+  const baseWorkouts = useMemo(() => {
+    switch (activeSource) {
+      case "recents":
+        return normalizedRecents;
+      case "custom":
+        return customWorkouts;
+      case "premade":
+        return StaticWorkouts;
+      default:
+        return [];
+    }
+  }, [activeSource, normalizedRecents, customWorkouts]);
+
+  // Search Filtering
+  const filteredWorkouts = useMemo(() => {
+    const query = debouncedSearch.trim().toLowerCase();
+
+    if (!query) return baseWorkouts;
+
+    return baseWorkouts.filter(
+      (workout) =>
+        workout.name.toLowerCase().includes(query) ||
+        workout.focus?.toLowerCase().includes(query)
+    );
+  }, [debouncedSearch, baseWorkouts]);
 
   return (
     <SafeAreaView className="flex-1 bg-white items-center align-center">
@@ -54,7 +75,7 @@ const AddEntry = () => {
         </Text>
 
         {/* Search Bar  */}
-        <SearchBar />
+        <SearchBar value={search} onChange={setSearch} />
 
         {/* Workout Log List, Recents-Custom-Pre.Made */}
         <View className="w-full items-center">
@@ -96,7 +117,7 @@ const AddEntry = () => {
         </View>
 
         {/* List displaying workouts that can be logged  */}
-        <WorkoutLogList workoutsToShow={workoutsToDisplay} curDate={date} />
+        <WorkoutLogList workoutsToShow={filteredWorkouts} curDate={date} />
       </View>
       {/* Create Workout Button  */}
       {activeSource === "custom" && (

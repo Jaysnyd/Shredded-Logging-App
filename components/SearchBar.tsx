@@ -1,12 +1,14 @@
 import Fontisto from "@expo/vector-icons/Fontisto";
-import { useState } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
 
-// FOR LATER:
 // Filter created workouts / recently used workouts when user types, add Debouncing as well
 
-const SearchBar = () => {
-  const [query, setQuery] = useState("");
+type Props = {
+  value: string;
+  onChange: (text: string) => void;
+};
+
+const SearchBar = ({ value, onChange }: Props) => {
   return (
     <View className="p-4  w-full items-center">
       {/* container  */}
@@ -18,14 +20,14 @@ const SearchBar = () => {
         <TextInput
           className="flex-1 h-12 text-secondary text-base ml-2"
           placeholder="Search Workouts.."
-          value={query}
-          onChangeText={setQuery}
+          value={value}
+          onChangeText={onChange}
           placeholderTextColor={"#4CB491"}
         />
 
         {/* Clear Button  */}
-        {query.length > 0 && (
-          <TouchableOpacity onPress={() => setQuery("")} activeOpacity={0.8}>
+        {value.length > 0 && (
+          <TouchableOpacity onPress={() => onChange("")} activeOpacity={0.8}>
             <Fontisto name="close" size={20} color="#4CB491" />
           </TouchableOpacity>
         )}
