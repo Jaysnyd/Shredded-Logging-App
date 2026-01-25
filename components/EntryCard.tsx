@@ -10,7 +10,7 @@ type Props = {
 const EntryCard = ({ workout, onPress }: Props) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View className="bg-white shadow mt-3 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
+      <View className="bg-white border border-2 border-primary shadow mt-3 mr-6 ml-6 p-3 rounded-xl flex-row items-center">
         <View className="ml-3 w-3/4">
           <Text className="text-lg font-bold text-black mb-1">
             {workout.name}
@@ -33,13 +33,6 @@ const EntryCard = ({ workout, onPress }: Props) => {
             )}
           </View>
         </View>
-
-        <TouchableOpacity
-          onPress={onPress}
-          className="absolute right-4 items-center bg-secondary px-4 py-2 rounded-full ml-14"
-        >
-          <Text className="text-white font-semibold">{">"}</Text>
-        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );

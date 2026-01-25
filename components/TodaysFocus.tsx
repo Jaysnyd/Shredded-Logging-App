@@ -1,3 +1,4 @@
+import { usePlan } from "@/context/PlanContext";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -10,23 +11,39 @@ type Props = {
 };
 
 export default function TodaysFocus({
-  title = "Push Day",
-  subtitle = "Chest, Shoulders, Triceps",
   label = "Today's Focus",
   onPlanPress,
   onStartPress,
 }: Props) {
+  const { todaysPlanDay } = usePlan();
+
+  const isNoPlan = todaysPlanDay?.key === "none" || !todaysPlanDay;
+
   return (
     <View className="bg-accent p-5 ml-6 mr-6 mt-2 rounded-xl flex-row justify-between items-center">
       {/* Left Text Section  */}
       <View>
-        
         <Text className="text-base font-semibold text-black">{label}</Text>
-        <Text className="text-2xl font-extrabold mt-1 text-black font-style: italic">
-          {title}
-        </Text>
-        
-        <Text className="text-sm text-black -mt-1 ">{subtitle}</Text>
+
+        {isNoPlan ? (
+          <>
+            <Text className="text-2xl font-extrabold mt-1 text-black italic">
+              No Plan Selected
+            </Text>
+            <Text className="text-sm text-black -mt-1">Shred your way!</Text>
+          </>
+        ) : todaysPlanDay ? (
+          <>
+            <Text className="text-2xl font-extrabold mt-1 text-black italic">
+              {todaysPlanDay.label}
+            </Text>
+            <Text className="text-sm text-black -mt-1">
+              {todaysPlanDay.focus.join(", ")}
+            </Text>
+          </>
+        ) : (
+          <Text className="text-sm text-black -mt-1">Rest Day</Text>
+        )}
       </View>
 
       {/* Right Button Section  */}

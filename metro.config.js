@@ -3,4 +3,8 @@ const { withNativeWind } = require("nativewind/metro");
 
 const config = getDefaultConfig(__dirname);
 
+config.resolver.alias = {
+  "@": __dirname, // maps @ to project root
+};
+
 module.exports = withNativeWind(config, { input: "./app/globals.css" });

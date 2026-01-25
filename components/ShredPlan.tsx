@@ -4,73 +4,43 @@
 //
 // When user selects plan, for the plan they selected ask them what day they want to start the plan then correspond that to their calendar. PPL -> Start: Monday --> Monday: Push, Tuesday: Pull, Wednesday: Legs, Thursday: Push, Friday: Pull, Saturday: Legs, Sunday: Rest
 
-import { Checkbox } from "expo-checkbox";
+import { usePlan } from "@/context/PlanContext";
+import { PlanType } from "@/types/plan";
+import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import StartDayModal from "./StartDayModal";
 
 const ShredPlan = () => {
-  const [checked1, setChecked1] = useState(false);
-  const [checked2, setChecked2] = useState(false);
-  const [checked3, setChecked3] = useState(false);
-  const [checked4, setChecked4] = useState(false);
-  const [checked5, setChecked5] = useState(false);
+  const { plan, setPlan } = usePlan();
 
-  //   Plans - PPL, FB, UL, BP, NP
-  const selectPlan = (planName: string) => {
-    switch (planName) {
-      case "PPL":
-        setChecked1(true);
-        setChecked2(false);
-        setChecked3(false);
-        setChecked4(false);
-        setChecked5(false);
-        break;
+  // const [selectedPlan, setSelectedPlan] = useState<PlanType | null>(null);
 
-      case "FB":
-        setChecked1(false);
-        setChecked2(true);
-        setChecked3(false);
-        setChecked4(false);
-        setChecked5(false);
-        break;
+  const [showStartDayModal, setShowStartDayModal] = useState(false);
 
-      case "UL":
-        setChecked1(false);
-        setChecked2(false);
-        setChecked3(true);
-        setChecked4(false);
-        setChecked5(false);
-        break;
+  const activePlan: PlanType = plan?.type ?? "none";
 
-      case "BP":
-        setChecked1(false);
-        setChecked2(false);
-        setChecked3(false);
-        setChecked4(true);
-        setChecked5(false);
-        break;
-
-      case "NP":
-        setChecked1(false);
-        setChecked2(false);
-        setChecked3(false);
-        setChecked4(false);
-        setChecked5(true);
-        break;
-
-      default:
-        setChecked1(false);
-        setChecked2(false);
-        setChecked3(false);
-        setChecked4(false);
-        setChecked5(false);
+  const handlePlanPress = (planType: PlanType) => {
+    // If no plan, set to none directly
+    if (planType === "none") {
+      setPlan("none", 0);
+      setShowStartDayModal(false);
+      return;
     }
+
+    setShowStartDayModal(true);
+    activePlan !== planType && setPlan(planType, 0);
+  };
+
+  const handleStartDaySelect = (startIndex: number) => {
+    setPlan(activePlan, startIndex);
+    setShowStartDayModal(false);
   };
 
   return (
     <View className="flex-column mt-4">
       {/* PUSH / PULL / LEGS  */}
-      <TouchableOpacity onPress={() => selectPlan("PPL")}>
+      <TouchableOpacity onPress={() => handlePlanPress("ppl")}>
         <View className="bg-accent mt-1 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
           <View>
             <Image
@@ -90,19 +60,16 @@ const ShredPlan = () => {
 
           <View className="absolute right-5 top-1/2">
             <Checkbox
-              value={checked1}
-              onValueChange={setChecked1}
-              color={checked1 ? "#4CB491" : undefined}
+              value={activePlan === "ppl"}
+              color={activePlan === "ppl" ? "#4CB491" : undefined}
             />
           </View>
         </View>
       </TouchableOpacity>
 
       {/* FULL BODY  */}
-      <TouchableOpacity onPress={() => selectPlan("FB")}>
+      <TouchableOpacity onPress={() => handlePlanPress("fullBody")}>
         <View className="bg-accent mt-2 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
-          <View></View>
-
           <View>
             <Image
               source={require("@/assets/images/BackPose-Panda.png")}
@@ -122,19 +89,16 @@ const ShredPlan = () => {
 
           <View className="absolute right-5 top-1/2">
             <Checkbox
-              value={checked2}
-              onValueChange={setChecked2}
-              color={checked2 ? "#4CB491" : undefined}
+              value={activePlan === "fullBody"}
+              color={activePlan === "fullBody" ? "#4CB491" : undefined}
             />
           </View>
         </View>
       </TouchableOpacity>
 
       {/* UPPER / LOWER  */}
-      <TouchableOpacity onPress={() => selectPlan("UL")}>
+      <TouchableOpacity onPress={() => handlePlanPress("upperLower")}>
         <View className="bg-accent mt-2 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
-          <View></View>
-
           <View>
             <Image
               source={require("@/assets/images/KettleBell-Squats-Panda.png")}
@@ -154,19 +118,16 @@ const ShredPlan = () => {
 
           <View className="absolute right-5 top-1/2">
             <Checkbox
-              value={checked3}
-              onValueChange={setChecked3}
-              color={checked3 ? "#4CB491" : undefined}
+              value={activePlan === "upperLower"}
+              color={activePlan === "upperLower" ? "#4CB491" : undefined}
             />
           </View>
         </View>
       </TouchableOpacity>
 
       {/* BODY PART  */}
-      <TouchableOpacity onPress={() => selectPlan("BP")}>
+      <TouchableOpacity onPress={() => handlePlanPress("bodyPart")}>
         <View className="bg-accent mt-2 mr-6 ml-6 p-2 rounded-xl flex-row items-center">
-          <View></View>
-
           <View>
             <Image
               source={require("@/assets/images/ExerciseBall-Panda.png")}
@@ -186,19 +147,16 @@ const ShredPlan = () => {
 
           <View className="absolute right-5 top-1/2">
             <Checkbox
-              value={checked4}
-              onValueChange={setChecked4}
-              color={checked4 ? "#4CB491" : undefined}
+              value={activePlan === "bodyPart"}
+              color={activePlan === "bodyPart" ? "#4CB491" : undefined}
             />
           </View>
         </View>
       </TouchableOpacity>
 
       {/* NO PLAN  */}
-      <TouchableOpacity onPress={() => selectPlan("NP")}>
+      <TouchableOpacity onPress={() => handlePlanPress("none")}>
         <View className="bg-accent mt-2 ml-6 mr-6 p-2 rounded-xl flex-row items-center">
-          <View></View>
-
           <View>
             <Image
               source={require("@/assets/images/FrontPose-Panda.png")}
@@ -214,13 +172,22 @@ const ShredPlan = () => {
 
           <View className="absolute right-5 top-1/2">
             <Checkbox
-              value={checked5}
-              onValueChange={setChecked5}
-              color={checked5 ? "#4CB491" : undefined}
+              value={activePlan === "none"}
+              color={activePlan === "none" ? "#4CB491" : undefined}
             />
           </View>
         </View>
       </TouchableOpacity>
+
+      {/* Modal for selecting start day  */}
+      {showStartDayModal && activePlan !== "none" && (
+        <StartDayModal
+          visible={showStartDayModal}
+          planType={activePlan}
+          onSelectStartIndex={handleStartDaySelect}
+          onClose={() => setShowStartDayModal(false)}
+        />
+      )}
     </View>
   );
 };

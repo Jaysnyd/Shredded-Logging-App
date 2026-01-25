@@ -2,9 +2,10 @@ import Calendar from "@/components/Calendar";
 import DateStrip from "@/components/DateStrip";
 import EntryCard from "@/components/EntryCard";
 import { useLogging } from "@/context/LogContext";
+import { usePlan } from "@/context/PlanContext";
+import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
-import Feather from '@expo/vector-icons/Feather';
 import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -26,7 +27,6 @@ const Log = () => {
   // USE OF LOG CONTEXT
   const { getWorkoutsForDate } = useLogging();
   const workouts = getWorkoutsForDate(selectedDate);
-  console.log(workouts); // DELETE CONSOLE LOG L8R
 
   // Header Date Formatting
   const dateObj = new Date(`${selectedDate}T00:00:00`);
@@ -40,6 +40,15 @@ const Log = () => {
     month: "long",
   });
 
+  // Todays Plan Day
+  const { getPlanDayForDate } = usePlan();
+  const planDayForSelectedDate = getPlanDayForDate(selectedDate);
+
+  const isNoPlan =
+    planDayForSelectedDate?.key === "none" || !planDayForSelectedDate;
+
+  console.log("Plan Day for Selected Date:", planDayForSelectedDate);
+  console.log("selectedDate:", selectedDate);
   return (
     <SafeAreaView className="flex-1 bg-white items-center align-center">
       <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center ">
@@ -75,7 +84,20 @@ const Log = () => {
           />
         </View>
 
-        {/* <PlanDayHeader /> */}
+        {/* TODAYS FOCUS HEADER */}
+        <View className="-mt-9 align-center text-center bg-accent p-4 mx-6 rounded-xl flex-row justify-center items-center">
+          {isNoPlan ? (
+            <>
+              <Text className="text-sm text-black font-bold -mt-1">
+                Todays Focus: Shred your way!
+              </Text>
+            </>
+          ) : (
+            <Text className="text-sm text-black font-bold">
+              Todays Focus: {planDayForSelectedDate.focus.join(", ")}
+            </Text>
+          )}
+        </View>
 
         {/* LOGGED WORKOUTS FOR SELECTED DATE:  */}
         <ScrollView

@@ -34,10 +34,20 @@ const ChangePlan = () => {
 
         <Modal
           visible={modalVisible}
-          text="Your Plan is the structure of how your training is organized throughout the week. It
-        divides your workouts into specific muscle groups or goals on different
-        days—helping you stay consistent, recover properly, and make steady
-        progress."
+          text="Push / Pull / Legs (PPL)
+Trains pushing, pulling, and leg movements on separate days for balanced volume and recovery.
+
+Full Body
+Works all major muscle groups each session, great for efficiency and overall strength.
+
+Upper / Lower
+Alternates upper-body and lower-body days to allow recovery while training frequently.
+
+Body Part
+Focuses on one primary muscle group per workout for targeted volume and intensity.
+
+No Plan
+Train however you want without a structured split—complete flexibility."
           onClose={() => setModalVisible(false)}
         />
       </View>
