@@ -21,11 +21,12 @@ const EditGoal = () => {
 
   const goalImages = [
     require("@/assets/images/panda-arm.png"),
-    require("@/assets/images/bench-press.png"),
     require("@/assets/images/squatting.png"),
-    require("@/assets/images/BackPose-Panda.png"),
-    require("@/assets/images/Dumbbells-panda.png"),
+    require("@/assets/images/bench-press.png"),
     require("@/assets/images/FrontPose-Panda.png"),
+    require("@/assets/images/ExerciseBall-Panda.png"),
+    require("@/assets/images/BackPose-Panda.png"),
+    require("@/assets/images/KettleBell-Squats-Panda.png"),
   ];
 
   // Change image modal
@@ -106,6 +107,7 @@ const EditGoal = () => {
           value={name}
           onChangeText={setName}
           autoFocus
+          maxLength={28}
         />
 
         {/* CHANGE GOAL PR  */}
@@ -115,6 +117,7 @@ const EditGoal = () => {
           value={pr}
           onChangeText={setPR}
           autoFocus
+          maxLength={8}
         />
       </View>
 

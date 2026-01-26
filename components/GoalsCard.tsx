@@ -15,7 +15,7 @@ const GoalsCard = ({ goal, onPress }: GoalsCardProps) => {
           <Image source={goal.image} className="w-24 h-24" />
         </View>
 
-        <View className="ml-3 w-1/2">
+        <View className="ml-2 w-1/2">
           <Text className="text-base font-bold text-black mb-2">
             {goal.name}
           </Text>

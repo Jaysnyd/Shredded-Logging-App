@@ -123,7 +123,7 @@ const AddEntry = () => {
       {activeSource === "custom" && (
         <TouchableOpacity
           onPress={() => router.push("/workouts/create")}
-          className="bg-secondary w-1/2  absolute bottom-28 p-4 rounded-xl items-center"
+          className="bg-secondary w-1/2  absolute bottom-32 p-4 rounded-xl items-center"
         >
           <Text className="text-white text-lg font-bold">Create Workout +</Text>
         </TouchableOpacity>

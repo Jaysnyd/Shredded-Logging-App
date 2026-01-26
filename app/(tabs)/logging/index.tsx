@@ -106,6 +106,12 @@ const Log = () => {
           contentContainerStyle={{ paddingBottom: 140 }}
         >
           <View className="w-full">
+            {workouts.length === 0 ? (
+              <Text className="text-center text-gray-400 mt-24">
+                No Workouts Logged Yet
+              </Text>
+            ) : null}
+
             {workouts.map((workout) => (
               <EntryCard
                 key={workout.id}

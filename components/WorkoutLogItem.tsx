@@ -51,7 +51,7 @@ const WorkoutLogItem = ({
       <View className="bg-white mt-4 mx-6 rounded-xl p-2 items-center flex-row">
         {/* Description  */}
 
-        <View className="ml-2">
+        <View className="ml-1">
           <Text className="text-lg font-bold text-black mb-1">{name}</Text>
 
           <View className="flex-row gap-4">

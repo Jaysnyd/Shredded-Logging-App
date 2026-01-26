@@ -2,6 +2,7 @@ import { useGoals } from "@/context/GoalsContext";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   Image,
   ScrollView,
   Text,
@@ -18,10 +19,18 @@ const AddGoal = () => {
   const [name, setName] = useState("");
   const [pr, setPR] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
+  const [error, setError] = useState(false);
 
   const { addGoal } = useGoals();
 
-  const handleCreateGoal = () => {
+  const handleSaveGoal = () => {
+    if (name.trim().length === 0) {
+      setError(true);
+      Alert.alert("Goal must have a name");
+      return;
+    }
+    setError(false);
+
     addGoal({
       id: uuidv4(),
       name: name,
@@ -35,10 +44,10 @@ const AddGoal = () => {
     require("@/assets/images/panda-arm.png"),
     require("@/assets/images/squatting.png"),
     require("@/assets/images/bench-press.png"),
+    require("@/assets/images/FrontPose-Panda.png"),
     require("@/assets/images/ExerciseBall-Panda.png"),
-    require("@/assets/images/panda-arm.png"),
-    require("@/assets/images/panda-arm.png"),
-    require("@/assets/images/panda-arm.png"),
+    require("@/assets/images/BackPose-Panda.png"),
+    require("@/assets/images/KettleBell-Squats-Panda.png"),
   ];
 
   return (
@@ -48,10 +57,10 @@ const AddGoal = () => {
       </Text>
 
       <View className="w-full bg-primary h-1/2 rounded-b-3xl mt-3">
-        <Text className="text-3xl font-bold text-white font-style: italic ml-8 pt-10">
+        <Text className="text-3xl font-bold text-white font-style: italic pt-10 text-center">
           Add New Goal
         </Text>
-        <Text className="text-secondary mb-2 ml-8">
+        <Text className="text-secondary mb-2 text-center">
           Something to work towards!
         </Text>
       </View>
@@ -67,7 +76,11 @@ const AddGoal = () => {
           placeholder="Enter Goal Name..."
           placeholderTextColor="#426D60"
           value={name}
-          onChangeText={setName}
+          maxLength={28}
+          onChangeText={(text) => {
+            setName(text);
+            if (error && text.trim().length > 0) setError(false);
+          }}
         />
 
         {/* CURRENT PR  */}
@@ -78,22 +91,19 @@ const AddGoal = () => {
           placeholderTextColor="#426D60"
           value={pr}
           onChangeText={setPR}
+          maxLength={8}
         />
 
         {/* SELECT GOAL IMAGE  */}
         <Text className="font-medium text-base mb-1">Select Image:</Text>
 
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={true}
-          contentContainerStyle={{ paddingLeft: 22 }}
-        >
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
           <View className="flex-row flew-wrap justify-between ">
             {images.map((img, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() => setSelectedImage(img)}
-                className={`mr-3 p-1 rounded-lg ${
+                className={`mr-2 p-1 rounded-lg ${
                   selectedImage === img ? "border-2 border-accent" : ""
                 }`}
               >
@@ -110,7 +120,7 @@ const AddGoal = () => {
 
       {/* SAVE GOAL BUTTON  */}
       <TouchableOpacity
-        onPress={handleCreateGoal}
+        onPress={handleSaveGoal}
         className="bg-secondary w-1/2 absolute bottom-56 p-4 rounded-xl mt-4 items-center"
       >
         <Text className="text-white text-lg font-bold">SAVE</Text>

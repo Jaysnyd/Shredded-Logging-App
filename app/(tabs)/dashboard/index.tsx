@@ -1,7 +1,7 @@
 import DashboardChart from "@/components/DashboardChart";
 import DashboardGoals from "@/components/DashboardGoals";
-import TodaysFocus from "@/components/TodaysFocus";
 import NoGoals from "@/components/NoGoals";
+import TodaysFocus from "@/components/TodaysFocus";
 import { useGoals } from "@/context/GoalsContext";
 import { useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
@@ -10,13 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Dashboard() {
   const { goals } = useGoals();
   const router = useRouter();
-
   const topGoals = goals.slice(0, 2);
-
-  // TEST if goals array is updated
-  // useEffect(() => {
-  //   console.log("Dash UPDATE", goals);
-  // }, [goals]);
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -39,7 +33,7 @@ export default function Dashboard() {
 
         {/* LOGGING CONSISTENCY CHART  */}
         <Text className="font-semibold text-xl text-black ml-7 mt-9 w-full">
-          Activity Progress
+          Logging Activity
         </Text>
         <DashboardChart />
 

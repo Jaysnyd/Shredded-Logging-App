@@ -16,11 +16,11 @@ const Goals = () => {
       </Text>
 
       {/* HEADER  */}
-      <View className=" w-3/4 mt-12 items-left align-left">
-        <Text className="text-3xl font-extrabold pr-2 text-black font-style: italic">
+      <View className=" w-3/4 mt-8 mb-8 items-left align-left">
+        <Text className="text-3xl font-extrabold pr-2 text-black font-style: italic text-center">
           My Goals
         </Text>
-        <Text className="text-gray-500 mb-2">
+        <Text className="text-gray-500 mb-2 mt-2 text-center">
           Set Goals, Be Consistent, See Results.
         </Text>
         <View className="w-full items-center pt-3">

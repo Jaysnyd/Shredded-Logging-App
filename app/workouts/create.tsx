@@ -58,7 +58,7 @@ const CreateWorkout = () => {
       </Text>
 
       <View className="mt-2 bg-primary w-full items-center align-center h-full">
-        <Text className="text-3xl font-bold text-white font-style: italic p-2">
+        <Text className="text-3xl mt-6 font-bold text-white font-style: italic p-2">
           Create a Workout
         </Text>
 
@@ -71,7 +71,7 @@ const CreateWorkout = () => {
         </View>
 
         {/* WORKOUT TEMPLATE */}
-        <ScrollView className="flex-1 flex-column w-11/12 mt-2 bg-white p-6 rounded-xl shadow-lg ">
+        <ScrollView className="flex-1 flex-column w-11/12 mt-4 bg-white p-6 rounded-xl shadow-lg ">
           <Text className="text-xl font-bold mb-4 text-center">
             Custom Workout
           </Text>
@@ -82,6 +82,7 @@ const CreateWorkout = () => {
             className="bg-white p-3 text-black rounded-xl mb-4 border border-gray-900"
             placeholder="Bench Press..."
             placeholderTextColor="#426D60"
+            maxLength={28}
             value={name}
             onChangeText={(text) => {
               setName(text);
@@ -95,6 +96,7 @@ const CreateWorkout = () => {
             className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
             placeholder="Chest..."
             placeholderTextColor="#426D60"
+            maxLength={14}
             value={focus}
             onChangeText={(text) => {
               setFocus(text);
@@ -108,6 +110,7 @@ const CreateWorkout = () => {
             className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
             placeholder="225lbs"
             placeholderTextColor="#426D60"
+            maxLength={6}
             value={weight}
             onChangeText={setWeight}
           />
@@ -118,6 +121,7 @@ const CreateWorkout = () => {
             className="bg-white p-3 rounded-xl mb-1 border border-gray-900"
             placeholder="3"
             placeholderTextColor="#426D60"
+            maxLength={2}
             value={sets}
             onChangeText={setSets}
           />
@@ -126,7 +130,7 @@ const CreateWorkout = () => {
         {/* SAVE WORKOUT BUTTON  */}
         <TouchableOpacity
           onPress={handleSaveWorkout}
-          className="bg-secondary w-1/2 p-4 rounded-xl mt-4 items-center border-4 border-primary"
+          className="bg-secondary w-1/2 p-4 rounded-xl mt-24 mb-16 items-center border-4 border-primary"
         >
           <Text className="text-white text-lg font-bold">SAVE</Text>
         </TouchableOpacity>

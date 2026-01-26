@@ -98,6 +98,7 @@ const EditCustomWorkout = () => {
           <TextInput
             className="bg-white p-3 text-black rounded-xl mb-4 border border-gray-900"
             value={name}
+            maxLength={28}
             onChangeText={(text) => {
               setName(text);
               if (error && text.trim().length > 0) setError(false);
@@ -109,6 +110,7 @@ const EditCustomWorkout = () => {
           <TextInput
             className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
             value={focus}
+            maxLength={14}
             onChangeText={setFocus}
           />
 
@@ -117,6 +119,7 @@ const EditCustomWorkout = () => {
           <TextInput
             className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
             value={weight}
+            maxLength={6}
             onChangeText={setWeight}
           />
 
@@ -125,6 +128,7 @@ const EditCustomWorkout = () => {
           <TextInput
             className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
             value={sets}
+            maxLength={2}
             onChangeText={setSets}
           />
         </View>
