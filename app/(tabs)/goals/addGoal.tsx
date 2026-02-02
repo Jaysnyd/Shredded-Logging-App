@@ -4,6 +4,8 @@ import { useState } from "react";
 import {
   Alert,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   Text,
   TextInput,
@@ -55,76 +57,94 @@ const AddGoal = () => {
       <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
         SHREDDED
       </Text>
+      
+      <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView
+          className="flex-1"
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ paddingBottom: 160 }}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Header  */}
+          <View className="w-full bg-primary h-1/2 rounded-b-3xl mt-3">
+            <Text className="text-3xl font-bold text-white font-style: italic pt-10 text-center">
+              Add New Goal
+            </Text>
+            <Text className="text-secondary mb-2 text-center">
+              Something to work towards!
+            </Text>
 
-      <View className="w-full bg-primary h-1/2 rounded-b-3xl mt-3">
-        <Text className="text-3xl font-bold text-white font-style: italic pt-10 text-center">
-          Add New Goal
-        </Text>
-        <Text className="text-secondary mb-2 text-center">
-          Something to work towards!
-        </Text>
-      </View>
+            {/* GOAL INPUT FORM  */}
+            <View className="-mt-32 mx-4 bg-white p-6 rounded-xl shadow-lg mt-6">
+              <Text className="text-xl font-bold mb-4 text-center">
+                Lets Shred
+              </Text>
 
-      {/* GOAL INPUTS  */}
-      <View className="flex flex-column absolute top-64 left-4 right-4 bg-white p-6 rounded-xl shadow-lg">
-        <Text className="text-xl font-bold mb-4 text-center">Lets Shred</Text>
+              {/* NAME GOAL  */}
+              <Text className="mt-3 mb-1 font-medium text-base">Goal: </Text>
+              <TextInput
+                className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
+                placeholder="Enter Goal Name..."
+                placeholderTextColor="#426D60"
+                value={name}
+                maxLength={28}
+                onChangeText={(text) => {
+                  setName(text);
+                  if (error && text.trim().length > 0) setError(false);
+                }}
+              />
 
-        {/* NAME GOAL  */}
-        <Text className="mt-3 mb-1 font-medium text-base">Goal: </Text>
-        <TextInput
-          className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
-          placeholder="Enter Goal Name..."
-          placeholderTextColor="#426D60"
-          value={name}
-          maxLength={28}
-          onChangeText={(text) => {
-            setName(text);
-            if (error && text.trim().length > 0) setError(false);
-          }}
-        />
+              {/* CURRENT PR  */}
+              <Text className="font-medium text-base mb-1">Current PR:</Text>
+              <TextInput
+                className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
+                placeholder="225lbs..."
+                placeholderTextColor="#426D60"
+                value={pr}
+                onChangeText={setPR}
+                maxLength={8}
+              />
 
-        {/* CURRENT PR  */}
-        <Text className="font-medium text-base mb-1">Current PR:</Text>
-        <TextInput
-          className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
-          placeholder="225lbs..."
-          placeholderTextColor="#426D60"
-          value={pr}
-          onChangeText={setPR}
-          maxLength={8}
-        />
+              {/* SELECT GOAL IMAGE  */}
+              <Text className="font-medium text-base mb-1">Select Image:</Text>
 
-        {/* SELECT GOAL IMAGE  */}
-        <Text className="font-medium text-base mb-1">Select Image:</Text>
-
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
-          <View className="flex-row flew-wrap justify-between ">
-            {images.map((img, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelectedImage(img)}
-                className={`mr-2 p-1 rounded-lg ${
-                  selectedImage === img ? "border-2 border-accent" : ""
-                }`}
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={true}
               >
-                <Image
-                  source={img}
-                  className="w-20 h-20 rounded-xl"
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            ))}
+                <View className="flex-row flew-wrap justify-between ">
+                  {images.map((img, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => setSelectedImage(img)}
+                      className={`mr-2 p-1 rounded-lg ${
+                        selectedImage === img ? "border-2 border-accent" : ""
+                      }`}
+                    >
+                      <Image
+                        source={img}
+                        className="w-20 h-20 rounded-xl"
+                        resizeMode="contain"
+                      />
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </ScrollView>
+            </View>
+
+            {/* SAVE GOAL BUTTON  */}
+            <TouchableOpacity
+              onPress={handleSaveGoal}
+              className="bg-secondary p-4 w-1/2 rounded-xl mt-12 self-center items-center "
+            >
+              <Text className="text-white text-lg font-bold">SAVE</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
-      </View>
-
-      {/* SAVE GOAL BUTTON  */}
-      <TouchableOpacity
-        onPress={handleSaveGoal}
-        className="bg-secondary w-1/2 absolute bottom-56 p-4 rounded-xl mt-4 items-center"
-      >
-        <Text className="text-white text-lg font-bold">SAVE</Text>
-      </TouchableOpacity>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

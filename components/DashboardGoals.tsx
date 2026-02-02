@@ -23,8 +23,6 @@ const DashboardGoals = ({ goal, onPress }: Props) => {
           </Text>
           <Text className="text-gray-500 text-base">Current PR: {goal.pr}</Text>
         </View>
-
-        {/* Button to goals page:  */}
       </View>
     </TouchableOpacity>
   );

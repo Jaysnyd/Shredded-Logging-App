@@ -17,7 +17,10 @@ export default function Dashboard() {
       <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
         SHREDDED
       </Text>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 70 }}
+        showsVerticalScrollIndicator={false}
+      >
         <Text className="text-md text-gray-400 ml-7 mt-8 w-full">
           Welcome Back, Billy!
         </Text>

@@ -27,7 +27,7 @@ const NoGoals = () => {
           onPress={handlePress}
           className="items-center bg-secondary px-4 py-2 rounded-full ml-9"
         >
-          <Text className="text-white font-semibold">{">"}</Text>
+          <Text className="text-white font-semibold">{"+"}</Text>
         </TouchableOpacity>
       </View>
     </View>
