@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import {
   Alert,
   Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -69,87 +72,100 @@ const EditCustomWorkout = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white items-center align-center">
+    <SafeAreaView className="flex-1 bg-white items-center w-full">
       <Text className="text-4xl text-primary font-bold font-style: italic w-full text-center">
         SHREDDED
       </Text>
 
-      <View className="mt-2 bg-primary w-full items-center align-center h-full">
-        <Text className="text-3xl font-bold text-white font-style: italic p-2">
-          Edit Your Workout
-        </Text>
+      <KeyboardAvoidingView
+        className="flex-1 w-full"
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView
+          className="flex-1"
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ paddingBottom: 160 }}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* FORM  */}
+          <View className="w-full bg-primary h-1/2 rounded-b-3xl mt-3">
+            <Text className="text-3xl font-bold text-white font-style: italic p-4 text-center">
+              Edit Your Workout
+            </Text>
 
-        <View className="w-full items-center">
-          <Image
-            source={require("@/assets/images/FrontPose-Panda.png")}
-            className="w-28 h-28 -mt-1"
-            resizeMode="contain"
-          />
-        </View>
+            <View className="w-full items-center">
+              <Image
+                source={require("@/assets/images/FrontPose-Panda.png")}
+                className="w-28 h-28 -mt-1"
+                resizeMode="contain"
+              />
+            </View>
 
-        {/* WORKOUT TEMPLATE */}
-        <View className="flex flex-column w-11/12 mt-2 bg-white p-6 rounded-xl shadow-lg">
-          <Text className="text-xl font-bold mb-4 text-center">
-            Change / Delete CUSTOM Workout
-          </Text>
+            {/* EDIT WORKOUT INPUTS */}
+            <View className="-mt-30 mx-4 bg-white p-6 rounded-xl shadow-lg">
+              <Text className="text-xl font-bold mb-4 text-center">
+                Change / Delete CUSTOM Workout
+              </Text>
 
-          {/* NAME  */}
-          <Text className="mt-3 mb-1 font-medium text-base">Name: </Text>
-          <TextInput
-            className="bg-white p-3 text-black rounded-xl mb-4 border border-gray-900"
-            value={name}
-            maxLength={28}
-            onChangeText={(text) => {
-              setName(text);
-              if (error && text.trim().length > 0) setError(false);
-            }}
-          />
+              {/* NAME  */}
+              <Text className="mt-3 mb-1 font-medium text-base">Name: </Text>
+              <TextInput
+                className="bg-white p-3 text-black rounded-xl mb-4 border border-gray-900"
+                value={name}
+                maxLength={28}
+                onChangeText={(text) => {
+                  setName(text);
+                  if (error && text.trim().length > 0) setError(false);
+                }}
+              />
 
-          {/* FOCUS */}
-          <Text className="font-medium text-base mb-1">Muscle Focus:</Text>
-          <TextInput
-            className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
-            value={focus}
-            maxLength={14}
-            onChangeText={setFocus}
-          />
+              {/* FOCUS */}
+              <Text className="font-medium text-base mb-1">Muscle Focus:</Text>
+              <TextInput
+                className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
+                value={focus}
+                maxLength={14}
+                onChangeText={setFocus}
+              />
 
-          {/* WEIGHT */}
-          <Text className="font-medium text-base mb-1">Weight:</Text>
-          <TextInput
-            className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
-            value={weight}
-            maxLength={6}
-            onChangeText={setWeight}
-          />
+              {/* WEIGHT */}
+              <Text className="font-medium text-base mb-1">Weight:</Text>
+              <TextInput
+                className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
+                value={weight}
+                maxLength={6}
+                onChangeText={setWeight}
+              />
 
-          {/* SETS */}
-          <Text className="font-medium text-base mb-1">Sets:</Text>
-          <TextInput
-            className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
-            value={sets}
-            maxLength={2}
-            onChangeText={setSets}
-          />
-        </View>
+              {/* SETS */}
+              <Text className="font-medium text-base mb-1">Sets:</Text>
+              <TextInput
+                className="bg-white p-3 rounded-xl mb-4 border border-gray-900"
+                value={sets}
+                maxLength={2}
+                onChangeText={setSets}
+              />
+            </View>
 
-        {/* DELETE GOAL / SAVE CHANGES BUTTONS  */}
-        <View className="w-full  p-4 rounded-xl mt-4 flex-row items-center justify-center gap-4">
-          <TouchableOpacity
-            onPress={handleDelete}
-            className="bg-red-500 w-1/4  p-4 rounded-xl items-center"
-          >
-            <Text className="text-white text-lge font-bold">DELETE</Text>
-          </TouchableOpacity>
+            {/* DELETE GOAL / SAVE CHANGES BUTTONS  */}
+            <View className="w-full  p-4 rounded-xl mt-4 flex-row items-center justify-center gap-4">
+              <TouchableOpacity
+                onPress={handleDelete}
+                className="bg-red-500 w-1/4  p-4 rounded-xl items-center"
+              >
+                <Text className="text-white text-lge font-bold">DELETE</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={handleSave}
-            className="bg-secondary w-1/2 p-4 rounded-xl items-center"
-          >
-            <Text className="text-white text-lge font-bold">SAVE</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+              <TouchableOpacity
+                onPress={handleSave}
+                className="bg-secondary w-1/2 p-4 rounded-xl items-center"
+              >
+                <Text className="text-white text-lge font-bold">SAVE</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

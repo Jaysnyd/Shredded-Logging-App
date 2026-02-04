@@ -115,7 +115,7 @@ const EditGoal = () => {
             />
           </View>
 
-          {/* EDIT GOAL  */}
+          {/* EDIT GOAL FORM  */}
           <View className="-mt-14 w-11/12 flex flex-column bg-white p-6 rounded-xl shadow-lg align-center self-center">
             <Text className="text-xl font-bold mb-4 text-center">
               Edit Goal:

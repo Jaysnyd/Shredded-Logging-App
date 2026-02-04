@@ -80,8 +80,8 @@ const CreateWorkout = () => {
               resizeMode="contain"
             />
 
-            {/* CREATE WORKOUT FORM  */}
-            <View className="-mt-32 mx-4 bg-white p-6 rounded-xl shadow-lg mt-6">
+            {/* CREATE WORKOUT INPUTS  */}
+            <View className="-mt-30 mx-4 bg-white p-6 rounded-xl shadow-lg">
               <Text className="text-xl font-bold mb-4 text-center">
                 Custom Workout
               </Text>
