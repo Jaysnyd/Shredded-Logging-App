@@ -26,7 +26,7 @@ const WorkoutLogItem = ({
   const { addWorkoutToDate } = useLogging();
 
   // Disable touchable opacity if workout is premade
-  const isPremade = source === "premade";
+  const isPremade = source === "premade" || source === "recent";
 
   const handleAddWorkout = () => {
     addWorkoutToDate(date, {
@@ -50,7 +50,6 @@ const WorkoutLogItem = ({
     >
       <View className="bg-white mt-4 mx-6 rounded-xl p-2 items-center flex-row">
         {/* Description  */}
-
         <View className="ml-1">
           <Text className="text-lg font-bold text-black mb-1">{name}</Text>
 
